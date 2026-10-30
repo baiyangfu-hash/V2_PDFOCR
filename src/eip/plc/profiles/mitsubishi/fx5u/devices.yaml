@@ -35,8 +35,32 @@ devices:
     allow_digit_spec: true
     allow_index_mod: true
     max_address_dec: 32767
+  F:
+    description: "Annunciator"
+    radix: 10
+    data_type: "BOOL"
+    allow_bit_spec: false
+    allow_digit_spec: true
+    allow_index_mod: true
+    max_address_dec: 32767
+  S:
+    description: "Step relay"
+    radix: 10
+    data_type: "BOOL"
+    allow_bit_spec: false
+    allow_digit_spec: true
+    allow_index_mod: true
+    max_address_dec: 4095
   B:
     description: "Link relay"
+    radix: 16
+    data_type: "BOOL"
+    allow_bit_spec: false
+    allow_digit_spec: true
+    allow_index_mod: true
+    max_address_hex: "7FFF"
+  SB:
+    description: "Link special relay"
     radix: 16
     data_type: "BOOL"
     allow_bit_spec: false
@@ -69,6 +93,14 @@ devices:
     max_address_dec: 32767
   W:
     description: "Link register"
+    radix: 16
+    data_type: "WORD"
+    allow_bit_spec: true
+    allow_digit_spec: false
+    allow_index_mod: true
+    max_address_hex: "7FFF"
+  SW:
+    description: "Link special register"
     radix: 16
     data_type: "WORD"
     allow_bit_spec: true
@@ -131,3 +163,11 @@ devices:
     allow_digit_spec: false
     allow_index_mod: false
     max_address_dec: 19
+  P:
+    description: "Pointer"
+    radix: 10
+    data_type: "POINTER"
+    allow_bit_spec: false
+    allow_digit_spec: false
+    allow_index_mod: false
+    max_address_dec: 4095

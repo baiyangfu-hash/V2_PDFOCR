@@ -17,6 +17,7 @@ class LadderStackCompiler:
     P0-04: Three-Stage Ladder Compiler with Mitsubishi FX5U MPS/MRD/MPP Result Stack Semantics.
     Converts a Rung's directed Geometry Graph into:
       1. Convergent series-parallel (AND/OR) condition expressions between junctions
+         (including inline COMPARE_BOX and INV_LINE '/' inversion)
       2. Explicit InstructionSequence including MPS (push), MRD (read top), MPP (pop)
          when a junction forks into multiple independent output branches (max 11 levels)
       3. Ordered GuardedStatement AST list preserving PLC top-to-bottom scan execution order
@@ -32,19 +33,18 @@ class LadderStackCompiler:
             adj.setdefault(edge.source_node, []).append(edge)
             rev_adj.setdefault(edge.target_node, []).append(edge)
 
-        # Sort outgoing edges top-to-bottom by symbol Y center
         for jid in adj:
-            adj[jid].sort(key=lambda e: (round(e.symbol.anchor.bbox.center[1], 1), e.symbol.anchor.bbox.x0))
+            adj[jid].sort(
+                key=lambda e: (round(e.symbol.left_port_coord[1], 1), e.symbol.anchor.bbox.x0)
+            )
 
-        # Identify all output edges (edges whose symbol is a Coil or Function Block terminating at J_RIGHT)
         output_edges: List[GeometryEdge] = [
             e for e in rung.geometry_edges if e.symbol.symbol_kind in self.OUTPUT_KINDS
         ]
         output_edges.sort(
-            key=lambda e: (round(e.symbol.anchor.bbox.center[1], 1), e.symbol.anchor.bbox.x0)
+            key=lambda e: (round(e.symbol.left_port_coord[1], 1), e.symbol.anchor.bbox.x0)
         )
 
-        # Build pure condition expression from J_LEFT to any internal junction node
         memo_expr: Dict[str, LogicExprNode] = {
             rung.left_rail_junction: LogicExprNode(expr_type="TRUE")
         }
@@ -64,11 +64,19 @@ class LadderStackCompiler:
             branch_exprs: List[LogicExprNode] = []
             for edge in in_edges:
                 pred_expr = compute_junction_expr(edge.source_node, visited_next)
-                atom_expr = self._symbol_to_logic_expr(edge.symbol)
-                if pred_expr.expr_type == "TRUE":
-                    combined = atom_expr
+                if edge.symbol.symbol_kind == "INV_LINE":
+                    combined = LogicExprNode(
+                        expr_type="NOT",
+                        children=[pred_expr],
+                        symbol_id=edge.symbol.symbol_id,
+                        anchor_ids=pred_expr.anchor_ids + [edge.symbol.symbol_id],
+                    )
                 else:
-                    combined = self._make_and([pred_expr, atom_expr])
+                    atom_expr = self._symbol_to_logic_expr(edge.symbol)
+                    if pred_expr.expr_type == "TRUE":
+                        combined = atom_expr
+                    else:
+                        combined = self._make_and([pred_expr, atom_expr])
                 branch_exprs.append(combined)
 
             if len(branch_exprs) == 1:
@@ -78,12 +86,10 @@ class LadderStackCompiler:
             memo_expr[target_j] = res
             return res
 
-        # Detect fork junctions (junctions that feed >= 2 distinct output paths without re-converging)
         fork_to_outputs: Dict[str, List[GeometryEdge]] = {}
         output_to_fork_and_local: Dict[str, Tuple[str, List[LadderSymbolNode]]] = {}
 
         for out_e in output_edges:
-            # Trace backwards from out_e.source_node until hitting a junction with out-degree > 1 or J_LEFT
             curr_j = out_e.source_node
             local_chain: List[LadderSymbolNode] = []
             while curr_j != rung.left_rail_junction:
@@ -91,7 +97,6 @@ class LadderStackCompiler:
                 in_edges = [
                     e for e in rev_adj.get(curr_j, []) if e.symbol.symbol_kind not in self.OUTPUT_KINDS
                 ]
-                # Stop at fork junction (out_deg >= 2) or convergent OR join (len(in_edges) >= 2)
                 if out_deg >= 2 or len(in_edges) != 1:
                     break
                 only_in = in_edges[0]
@@ -102,7 +107,6 @@ class LadderStackCompiler:
             fork_to_outputs.setdefault(fork_j, []).append(out_e)
             output_to_fork_and_local[out_e.edge_id] = (fork_j, local_chain)
 
-        # Generate InstructionSequence (including MPS / MRD / MPP) and GuardedStatement list
         inst_seq: List[InstructionStep] = []
         guarded_stmts: List[GuardedStatement] = []
         step_no = 0
@@ -113,7 +117,6 @@ class LadderStackCompiler:
             siblings = fork_to_outputs.get(fork_j, [out_e])
             prefix_expr = compute_junction_expr(fork_j, set())
 
-            # Emit prefix instructions once when first encountering this fork
             if fork_j not in emitted_forks:
                 emitted_forks.add(fork_j)
                 prefix_steps = self._expr_to_instructions(prefix_expr, is_root=True)
@@ -166,31 +169,76 @@ class LadderStackCompiler:
                         )
                     )
 
-            # Emit local branch series contacts
-            local_exprs: List[LogicExprNode] = []
-            for sym in local_syms:
-                local_exprs.append(self._symbol_to_logic_expr(sym))
+            # Build full enable condition and emit local branch series instructions
+            curr_enable: LogicExprNode = prefix_expr
+            for idx_local, sym in enumerate(local_syms):
                 step_no += 1
-                op_code = self._contact_opcode(sym, is_load=(fork_j == rung.left_rail_junction and len(local_exprs) == 1 and prefix_expr.expr_type == "TRUE"))
-                dev_txt = sym.device.raw_text if sym.device else ""
-                inst_seq.append(
-                    InstructionStep(
-                        step_no=step_no,
-                        opcode=op_code,
-                        operands=[dev_txt] if dev_txt else [],
-                        source_symbol_id=sym.symbol_id,
-                        stack_depth_after=stack_depth,
-                    )
+                is_load = (
+                    fork_j == rung.left_rail_junction
+                    and idx_local == 0
+                    and prefix_expr.expr_type == "TRUE"
                 )
+                if sym.symbol_kind == "INV_LINE":
+                    curr_enable = LogicExprNode(
+                        expr_type="NOT",
+                        children=[curr_enable],
+                        symbol_id=sym.symbol_id,
+                        anchor_ids=curr_enable.anchor_ids + [sym.symbol_id],
+                    )
+                    inst_seq.append(
+                        InstructionStep(
+                            step_no=step_no,
+                            opcode="INV",
+                            operands=[],
+                            source_symbol_id=sym.symbol_id,
+                            stack_depth_after=stack_depth,
+                        )
+                    )
+                elif sym.symbol_kind == "COMPARE_BOX":
+                    comp_expr = self._symbol_to_logic_expr(sym)
+                    curr_enable = (
+                        comp_expr
+                        if curr_enable.expr_type == "TRUE"
+                        else self._make_and([curr_enable, comp_expr])
+                    )
+                    op_prefix = "LD" if is_load else "AND"
+                    op_code = (
+                        sym.mnemonic
+                        if sym.mnemonic.startswith(("LD", "AND", "OR"))
+                        else f"{op_prefix}{sym.mnemonic}"
+                    )
+                    ops_txt = [
+                        op.raw_text if hasattr(op, "raw_text") else str(op)
+                        for op in sym.operands
+                    ]
+                    inst_seq.append(
+                        InstructionStep(
+                            step_no=step_no,
+                            opcode=op_code,
+                            operands=ops_txt,
+                            source_symbol_id=sym.symbol_id,
+                            stack_depth_after=stack_depth,
+                        )
+                    )
+                else:
+                    sym_expr = self._symbol_to_logic_expr(sym)
+                    curr_enable = (
+                        sym_expr
+                        if curr_enable.expr_type == "TRUE"
+                        else self._make_and([curr_enable, sym_expr])
+                    )
+                    op_code = self._contact_opcode(sym, is_load=is_load)
+                    dev_txt = sym.device.raw_text if sym.device else ""
+                    inst_seq.append(
+                        InstructionStep(
+                            step_no=step_no,
+                            opcode=op_code,
+                            operands=[dev_txt] if dev_txt else [],
+                            source_symbol_id=sym.symbol_id,
+                            stack_depth_after=stack_depth,
+                        )
+                    )
 
-            # Build full enable condition for this output statement
-            cond_parts: List[LogicExprNode] = []
-            if prefix_expr.expr_type != "TRUE":
-                cond_parts.append(prefix_expr)
-            cond_parts.extend(local_exprs)
-            full_enable = self._make_and(cond_parts) if cond_parts else LogicExprNode(expr_type="TRUE")
-
-            # Emit output action instruction
             out_sym = out_e.symbol
             step_no += 1
             out_ops = [
@@ -223,7 +271,7 @@ class LadderStackCompiler:
             guarded_stmts.append(
                 GuardedStatement(
                     exec_order=exec_idx,
-                    enable_condition=full_enable,
+                    enable_condition=curr_enable,
                     action_kind=act_kind,  # type: ignore[arg-type]
                     mnemonic=out_sym.mnemonic,
                     target_device=out_sym.device,
@@ -239,6 +287,18 @@ class LadderStackCompiler:
 
     @staticmethod
     def _symbol_to_logic_expr(sym: LadderSymbolNode) -> LogicExprNode:
+        if sym.symbol_kind == "COMPARE_BOX":
+            ops_str = ", ".join(
+                op.raw_text if hasattr(op, "raw_text") else str(op)
+                for op in sym.operands
+            )
+            return LogicExprNode(
+                expr_type="COMPARE",
+                operator=f"{sym.mnemonic}({ops_str})",
+                device_ref=sym.device,
+                symbol_id=sym.symbol_id,
+                anchor_ids=[sym.symbol_id],
+            )
         atom = LogicExprNode(
             expr_type="ATOM",
             operator=sym.device.raw_text if sym.device else sym.mnemonic,
@@ -320,11 +380,18 @@ class LadderStackCompiler:
             op = "LD" if is_root else "AND"
             dev = expr.device_ref.raw_text if expr.device_ref else ""
             return [(op, [dev], expr.symbol_id)]
+        if expr.expr_type == "COMPARE":
+            op = "LD_CMP" if is_root else "AND_CMP"
+            return [(op, [expr.operator or ""], expr.symbol_id)]
         if expr.expr_type == "NOT" and expr.children:
             child = expr.children[0]
-            op = "LDI" if is_root else "ANI"
-            dev = child.device_ref.raw_text if child.device_ref else ""
-            return [(op, [dev], expr.symbol_id)]
+            if child.expr_type == "ATOM":
+                op = "LDI" if is_root else "ANI"
+                dev = child.device_ref.raw_text if child.device_ref else ""
+                return [(op, [dev], expr.symbol_id)]
+            inner_steps = self._expr_to_instructions(child, is_root=is_root)
+            inner_steps.append(("INV", [], expr.symbol_id))
+            return inner_steps
         if expr.expr_type == "RISE_EDGE":
             op = "LDP" if is_root else "ANDP"
             dev = expr.device_ref.raw_text if expr.device_ref else ""
@@ -342,7 +409,7 @@ class LadderStackCompiler:
                     if ch.expr_type == "ATOM":
                         dev = ch.device_ref.raw_text if ch.device_ref else ""
                         steps.append(("OR", [dev], ch.symbol_id))
-                    elif ch.expr_type == "NOT" and ch.children:
+                    elif ch.expr_type == "NOT" and ch.children and ch.children[0].expr_type == "ATOM":
                         dev = ch.children[0].device_ref.raw_text if ch.children[0].device_ref else ""
                         steps.append(("ORI", [dev], ch.symbol_id))
                     else:

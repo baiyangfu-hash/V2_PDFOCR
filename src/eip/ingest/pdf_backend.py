@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import math
 import re
 from pathlib import Path
 from typing import Dict, List, Optional, Protocol, Tuple
@@ -102,7 +103,37 @@ class PyMuPDFBackend:
 
         for d in drawings:
             stroke_w = float(d.get("width") or 0.5)
-            for item in d.get("items", []):
+            is_filled = bool(d.get("fill") is not None)
+            items = d.get("items", [])
+            has_bezier = any(it[0] in ("c", "qu") for it in items)
+
+            # Check for filled 4-point arrowhead polygons in GX Works3
+            if is_filled and not has_bezier and all(it[0] == "l" for it in items):
+                poly_pts: List[Tuple[float, float]] = []
+                for it in items:
+                    p1, p2 = it[1], it[2]
+                    if not poly_pts:
+                        poly_pts.append((float(p1.x), float(p1.y)))
+                    poly_pts.append((float(p2.x), float(p2.y)))
+                if len(poly_pts) >= 3:
+                    xs = [p[0] for p in poly_pts]
+                    ys = [p[1] for p in poly_pts]
+                    curve_idx += 1
+                    curves.append(
+                        RawVectorCurve(
+                            curve_id=f"C_p{page_no}_{curve_idx}",
+                            page_no=page_no,
+                            points=poly_pts,
+                            bbox=BoundingBox(
+                                x0=min(xs), y0=min(ys), x1=max(xs), y1=max(ys)
+                            ),
+                            stroke_width=stroke_w,
+                            is_filled=True,
+                        )
+                    )
+                    continue
+
+            for item in items:
                 op = item[0]
                 if op == "l":
                     p1, p2 = item[1], item[2]
@@ -132,7 +163,7 @@ class PyMuPDFBackend:
                                 y1=float(r.y1),
                             ),
                             stroke_width=stroke_w,
-                            is_filled=bool(d.get("fill") is not None),
+                            is_filled=is_filled,
                         )
                     )
                 elif op in ("c", "qu"):
@@ -149,6 +180,7 @@ class PyMuPDFBackend:
                                 x0=min(xs), y0=min(ys), x1=max(xs), y1=max(ys)
                             ),
                             stroke_width=stroke_w,
+                            is_filled=is_filled,
                         )
                     )
 
@@ -247,6 +279,9 @@ class PdfPlumberBackend:
             for idx, c_obj in enumerate(page.curves, start=1):
                 path_cmds = c_obj.get("path", [])
                 has_bezier = any(cmd[0] in ("c", "v", "y") for cmd in path_cmds)
+                is_filled = bool(c_obj.get("fill", False))
+                stroke_w = float(c_obj.get("linewidth") or 0.5)
+
                 all_pts: List[Tuple[float, float]] = []
                 for cmd in path_cmds:
                     for pt in cmd[1:]:
@@ -255,39 +290,47 @@ class PdfPlumberBackend:
                 if not all_pts:
                     all_pts = [(float(px), float(py)) for px, py in c_obj.get("pts", [])]
 
-                if has_bezier or len(all_pts) > 2:
-                    xs = [p[0] for p in all_pts]
-                    ys = [p[1] for p in all_pts]
-                    curves.append(
-                        RawVectorCurve(
-                            curve_id=f"C_p{page_no}_{idx}",
-                            page_no=page_no,
-                            points=all_pts,
-                            bbox=BoundingBox(
-                                x0=min(xs),
-                                y0=min(ys),
-                                x1=max(xs),
-                                y1=max(ys),
-                            ),
-                            stroke_width=float(c_obj.get("linewidth") or 0.5),
+                if has_bezier or is_filled:
+                    if len(all_pts) >= 2:
+                        xs = [p[0] for p in all_pts]
+                        ys = [p[1] for p in all_pts]
+                        curves.append(
+                            RawVectorCurve(
+                                curve_id=f"C_p{page_no}_{idx}",
+                                page_no=page_no,
+                                points=all_pts,
+                                bbox=BoundingBox(
+                                    x0=min(xs),
+                                    y0=min(ys),
+                                    x1=max(xs),
+                                    y1=max(ys),
+                                ),
+                                stroke_width=stroke_w,
+                                is_filled=is_filled,
+                            )
                         )
-                    )
-                elif len(all_pts) == 2:
-                    lines.append(
-                        RawVectorLine(
-                            line_id=f"L_p{page_no}_c{idx}",
-                            page_no=page_no,
-                            x0=all_pts[0][0],
-                            y0=all_pts[0][1],
-                            x1=all_pts[1][0],
-                            y1=all_pts[1][1],
-                            stroke_width=float(c_obj.get("linewidth") or 0.5),
-                        )
-                    )
+                else:
+                    # Unfilled straight polyline (e.g. GX Works3 3-point power rail or vertical drop line):
+                    # decompose into consecutive 2-point RawVectorLine segments
+                    for seg_k in range(len(all_pts) - 1):
+                        p_a = all_pts[seg_k]
+                        p_b = all_pts[seg_k + 1]
+                        if math.hypot(p_b[0] - p_a[0], p_b[1] - p_a[1]) > 0.05:
+                            lines.append(
+                                RawVectorLine(
+                                    line_id=f"L_p{page_no}_c{idx}_{seg_k + 1}",
+                                    page_no=page_no,
+                                    x0=p_a[0],
+                                    y0=p_a[1],
+                                    x1=p_b[0],
+                                    y1=p_b[1],
+                                    stroke_width=stroke_w,
+                                )
+                            )
 
             raw_words = page.extract_words(
-                x_tolerance=2.5,
-                y_tolerance=2.0,
+                x_tolerance=1.2,
+                y_tolerance=1.5,
                 keep_blank_chars=False,
                 extra_attrs=["fontname", "size"],
             )

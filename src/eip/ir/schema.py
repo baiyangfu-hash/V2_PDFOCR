@@ -84,6 +84,7 @@ class RawVectorCurve(BaseModel):
     points: List[Tuple[float, float]]
     bbox: BoundingBox
     stroke_width: float = 0.5
+    is_filled: bool = False
 
 
 class RawTextSpan(BaseModel):
@@ -129,7 +130,7 @@ class GeometryMergeRecord(BaseModel):
 
 
 class TypedDeviceIR(BaseModel):
-    """Structured Mitsubishi FX5U device or constant operand representation."""
+    """Structured Mitsubishi FX5U device, constant, or symbolic label representation."""
     raw_text: str
     device_type: str
     base_address: str
@@ -138,7 +139,17 @@ class TypedDeviceIR(BaseModel):
     bit_index: Optional[int] = None
     digit_k: Optional[int] = None
     index_reg: Optional[str] = None
-    data_type: Literal["BOOL", "BIT_ARRAY", "WORD", "DWORD", "TIMER", "COUNTER", "CONSTANT"]
+    data_type: Literal[
+        "BOOL",
+        "BIT_ARRAY",
+        "WORD",
+        "DWORD",
+        "TIMER",
+        "COUNTER",
+        "POINTER",
+        "CONSTANT",
+        "LABEL",
+    ]
     is_constant: bool = False
     cpu_profile: str = "FX5U"
     is_valid: bool = True
@@ -153,6 +164,7 @@ class LadderSymbolNode(BaseModel):
         "NC_CONTACT",
         "RISE_CONTACT",
         "FALL_CONTACT",
+        "COMPARE_BOX",
         "OUT_COIL",
         "SET_COIL",
         "RST_COIL",
@@ -200,6 +212,8 @@ class LogicExprNode(BaseModel):
         if self.expr_type == "ATOM":
             dev = self.device_ref.raw_text if self.device_ref else (self.operator or "UNKNOWN")
             return dev
+        if self.expr_type == "COMPARE":
+            return self.operator or "COMPARE"
         if self.expr_type == "RISE_EDGE":
             dev = self.device_ref.raw_text if self.device_ref else "UNKNOWN"
             return f"RISE({dev})"

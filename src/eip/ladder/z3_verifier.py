@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 import sympy
 from sympy.logic.boolalg import And, Boolean, Not, Or, Xor
 from sympy.logic.inference import satisfiable
@@ -51,7 +51,6 @@ class LadderFormalVerifier:
         f_a = self._to_sympy(expr_a, sym_map)
         f_b = self._to_sympy(expr_b, sym_map)
 
-        # Check satisfiability of (f_a XOR f_b), i.e., f_a != f_b
         diff_formula = Xor(f_a, f_b)
         model = satisfiable(diff_formula)
         if model is False:
@@ -102,8 +101,12 @@ class LadderFormalVerifier:
     ) -> Boolean:
         if node.expr_type == "TRUE":
             return sympy.true
-        if node.expr_type == "ATOM":
-            name = node.device_ref.raw_text if node.device_ref else (node.operator or "UNKNOWN")
+        if node.expr_type in ("ATOM", "COMPARE"):
+            name = (
+                node.operator
+                if node.expr_type == "COMPARE"
+                else (node.device_ref.raw_text if node.device_ref else (node.operator or "UNKNOWN"))
+            ) or "UNKNOWN"
             if name not in sym_map:
                 sym_map[name] = sympy.Symbol(name)
             return sym_map[name]
@@ -126,8 +129,12 @@ class LadderFormalVerifier:
 
         if node.expr_type == "TRUE":
             return z3.BoolVal(True)
-        if node.expr_type == "ATOM":
-            name = node.device_ref.raw_text if node.device_ref else (node.operator or "UNKNOWN")
+        if node.expr_type in ("ATOM", "COMPARE"):
+            name = (
+                node.operator
+                if node.expr_type == "COMPARE"
+                else (node.device_ref.raw_text if node.device_ref else (node.operator or "UNKNOWN"))
+            ) or "UNKNOWN"
             if name not in z3_vars:
                 z3_vars[name] = z3.Bool(name)
             return z3_vars[name]
@@ -152,13 +159,11 @@ class LadderFormalVerifier:
 
         for r in rungs:
             r_diags: List[str] = []
-            # 1. Check for unconnected ports
             for edge in r.geometry_edges:
                 if edge.source_node == "J_UNCONNECTED" or edge.target_node == "J_UNCONNECTED":
                     msg = f"[{r.rung_id}] Dangling topology on symbol {edge.symbol.symbol_id} ({edge.source_node} -> {edge.target_node})"
                     r_diags.append(msg)
 
-            # 2. Check for invalid FX5U device addresses
             for sym in r.geometry_nodes:
                 if sym.device and not sym.device.is_valid:
                     msg = f"[{r.rung_id}] Invalid FX5U device on {sym.symbol_id}: {sym.device.validation_error}"
@@ -168,7 +173,6 @@ class LadderFormalVerifier:
                         msg = f"[{r.rung_id}] Invalid operand on {sym.symbol_id}: {op.validation_error}"
                         r_diags.append(msg)
 
-            # 3. Track OUT_COIL targets for double-coil conflict check
             for stmt in r.guarded_statements:
                 if stmt.action_kind == "COIL_OUT" and stmt.target_device:
                     dev_name = stmt.target_device.raw_text
@@ -178,7 +182,6 @@ class LadderFormalVerifier:
             r.verification_status = "FAILED" if r_diags else "VERIFIED"
             all_diagnostics.extend(r_diags)
 
-        # Check double-coil conflicts across rungs
         for dev_name, owner_rungs in out_coil_owners.items():
             if len(owner_rungs) > 1:
                 conflict_msg = (

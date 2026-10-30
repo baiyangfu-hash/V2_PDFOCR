@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import os
 import re
 from pathlib import Path
 from typing import Any, Dict, Optional
@@ -14,24 +13,27 @@ class FX5UDeviceLexer:
     Deterministic Mitsubishi MELSEC iQ-F (FX5U) Device Lexer & Validator (P0-02).
     Strictly enforces:
       - Octal addressing for X / Y (rejects digits 8, 9)
-      - Decimal addressing for M, L, SM, D, R, SD, T, ST, C, LC, Z, V
-      - Hexadecimal addressing for B, W
+      - Decimal addressing for M, L, F, S, SM, D, R, SD, T, ST, C, LC, Z, V, P
+      - Hexadecimal addressing for B, SB, W, SW
       - Word bit specification D100.0 ~ D100.F (hexadecimal bit index 0..F only; disallowed on bit devices)
-      - Digit specification K1X0 ~ K8M100 (K1..K8 nibbles only on bit devices)
+      - Digit specification K1X0 ~ K8M100, K8F0 (K1..K8 nibbles only on bit devices)
       - Index register modification (e.g. D100Z0, X0Z1, M10V0; Z0..Z19, V0..V19)
       - Numeric constants: K (decimal), H (hexadecimal), E (float)
+      - GX Works3 array/symbolic global labels (e.g. T_0[0], 准备完成1…)
     """
 
     _CONST_K_RE = re.compile(r"^K([+-]?[0-9]+)$")
     _CONST_H_RE = re.compile(r"^H([0-9A-F]+)$")
     _CONST_E_RE = re.compile(r"^E([+-]?[0-9]+(?:\.[0-9]+)?)$")
+    _ARRAY_LABEL_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*\[[0-9]+\](?:\.[A-Za-z0-9_\u4e00-\u9fff]+)?$")
+    _CJK_CHAR_RE = re.compile(r"[\u4e00-\u9fff]")
 
     # Composite device pattern:
-    # Optional K<digit> prefix + Device letters (SM, SD, ST, LC, X, Y, M, L, B, D, R, W, T, C, Z, V)
+    # Optional K<digit> prefix + Device letters (SM, SD, ST, SB, SW, LC, X, Y, M, L, F, S, B, D, R, W, T, C, Z, V, P)
     # + Base address + Optional .<bit> + Optional <Z/V><index_num>
     _DEVICE_RE = re.compile(
         r"^(?:K([0-9]+))?"
-        r"(SM|SD|ST|LC|X|Y|M|L|B|D|R|W|T|C|Z|V)"
+        r"(SM|SD|ST|SB|SW|LC|X|Y|M|L|F|S|B|D|R|W|T|C|Z|V|P)"
         r"([0-9A-Z]+?)"
         r"(?:\.([0-9A-Z]+))?"
         r"(?:([ZV])([0-9]+))?$"
@@ -51,13 +53,29 @@ class FX5UDeviceLexer:
         self.devices_cfg: Dict[str, Any] = self.profile["devices"]
 
     def parse(self, raw_token: str) -> TypedDeviceIR:
-        token = raw_token.strip().upper()
-        if not token:
+        raw_clean = raw_token.strip()
+        if not raw_clean:
             return self._invalid(raw_token, "Empty device token")
 
-        # 1. Check constants (K, H, E) - Note: K followed by a device (e.g. K4M0) is NOT a constant
+        # 0. Check GX Works3 Symbolic Array Label (e.g. T_0[0]) or CJK Global Label (e.g. 准备完成1…)
+        if self._ARRAY_LABEL_RE.match(raw_clean) or self._CJK_CHAR_RE.search(raw_clean):
+            return TypedDeviceIR(
+                raw_text=raw_clean,
+                device_type="LABEL",
+                base_address=raw_clean,
+                radix=10,
+                address_int=0,
+                data_type="LABEL",
+                is_constant=False,
+                cpu_profile="FX5U",
+                is_valid=True,
+                validation_error=None,
+            )
+
+        token = raw_clean.upper()
+
+        # 1. Check constants (K, H, E) - Note: K followed by a device (e.g. K4M0, K8F0) is NOT a constant
         if token.startswith("K") and len(token) > 1 and (token[1].isdigit() or token[1] in "+-"):
-            # Check if it's purely a decimal constant like K100, K-50
             m_k = self._CONST_K_RE.match(token)
             if m_k:
                 val = int(m_k.group(1), 10)
@@ -71,8 +89,7 @@ class FX5UDeviceLexer:
                     is_constant=True,
                     is_valid=True,
                 )
-            # If it starts with K<digit> but has non-digits and does NOT match a device prefix, reject
-            if not re.match(r"^K[0-9]+(SM|SD|ST|LC|X|Y|M|L|B|D|R|W|T|C)", token):
+            if not re.match(r"^K[0-9]+(SM|SD|ST|SB|SW|LC|X|Y|M|L|F|S|B|D|R|W|T|C|P)", token):
                 return self._invalid(raw_token, f"Invalid decimal constant syntax: {token}")
 
         if token.startswith("H"):
@@ -212,7 +229,6 @@ class FX5UDeviceLexer:
                     dev_type=dev_type,
                     radix=radix,
                 )
-            # In FX5U, bit specification on 16-bit word registers is 1-character Hex 0..F
             if not re.match(r"^[0-9A-F]$", bit_str):
                 return self._invalid(
                     raw_token,

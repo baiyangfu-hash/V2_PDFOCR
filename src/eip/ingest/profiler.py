@@ -64,14 +64,15 @@ class PDFModalityProfiler:
     @staticmethod
     def _estimate_contact_width(lines: List[RawVectorLine]) -> float:
         """
-        Finds pairs of short vertical parallel segments with matching Y-centers and heights,
+        Finds pairs of short vertical parallel segments with matching Y-centers and heights
+        (supporting both real GX Works3 5.82pt contact bars and larger synthetic contact bars),
         and returns the median horizontal spacing as the characteristic contact width W_contact.
         """
         vert_bars: List[Tuple[float, float, float]] = []  # (x, y_center, height)
         for ln in lines:
             dx = abs(ln.x1 - ln.x0)
             dy = abs(ln.y1 - ln.y0)
-            if dx <= 0.5 and 6.0 <= dy <= 28.0:
+            if dx <= 0.5 and 4.2 <= dy <= 28.0:
                 x_mid = 0.5 * (ln.x0 + ln.x1)
                 y_mid = 0.5 * (ln.y0 + ln.y1)
                 vert_bars.append((x_mid, y_mid, dy))
@@ -90,12 +91,12 @@ class PDFModalityProfiler:
                         break
 
         if not spacings:
-            return 6.0  # Standard fallback if page has no contacts
+            return 5.82  # Standard GX Works3 fallback if page has no contacts
         return float(statistics.median(spacings))
 
     @staticmethod
     def _estimate_stroke_width(lines: List[RawVectorLine]) -> float:
         widths = [ln.stroke_width for ln in lines if ln.stroke_width > 0.05]
         if not widths:
-            return 0.5
+            return 0.42
         return float(statistics.median(widths))
