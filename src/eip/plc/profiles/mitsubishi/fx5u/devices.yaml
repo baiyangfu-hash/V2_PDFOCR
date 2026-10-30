@@ -1,0 +1,133 @@
+cpu_series: "MELSEC iQ-F"
+cpu_model: "FX5U"
+max_mps_nesting: 11
+
+devices:
+  X:
+    description: "Input relay"
+    radix: 8
+    data_type: "BOOL"
+    allow_bit_spec: false
+    allow_digit_spec: true
+    allow_index_mod: true
+    max_address_octal: "1777"
+  Y:
+    description: "Output relay"
+    radix: 8
+    data_type: "BOOL"
+    allow_bit_spec: false
+    allow_digit_spec: true
+    allow_index_mod: true
+    max_address_octal: "1777"
+  M:
+    description: "Internal relay"
+    radix: 10
+    data_type: "BOOL"
+    allow_bit_spec: false
+    allow_digit_spec: true
+    allow_index_mod: true
+    max_address_dec: 32767
+  L:
+    description: "Latch relay"
+    radix: 10
+    data_type: "BOOL"
+    allow_bit_spec: false
+    allow_digit_spec: true
+    allow_index_mod: true
+    max_address_dec: 32767
+  B:
+    description: "Link relay"
+    radix: 16
+    data_type: "BOOL"
+    allow_bit_spec: false
+    allow_digit_spec: true
+    allow_index_mod: true
+    max_address_hex: "7FFF"
+  SM:
+    description: "Special relay"
+    radix: 10
+    data_type: "BOOL"
+    allow_bit_spec: false
+    allow_digit_spec: true
+    allow_index_mod: false
+    max_address_dec: 9999
+  D:
+    description: "Data register"
+    radix: 10
+    data_type: "WORD"
+    allow_bit_spec: true
+    allow_digit_spec: false
+    allow_index_mod: true
+    max_address_dec: 7999
+  R:
+    description: "File register"
+    radix: 10
+    data_type: "WORD"
+    allow_bit_spec: true
+    allow_digit_spec: false
+    allow_index_mod: true
+    max_address_dec: 32767
+  W:
+    description: "Link register"
+    radix: 16
+    data_type: "WORD"
+    allow_bit_spec: true
+    allow_digit_spec: false
+    allow_index_mod: true
+    max_address_hex: "7FFF"
+  SD:
+    description: "Special register"
+    radix: 10
+    data_type: "WORD"
+    allow_bit_spec: true
+    allow_digit_spec: false
+    allow_index_mod: false
+    max_address_dec: 9999
+  T:
+    description: "Timer"
+    radix: 10
+    data_type: "TIMER"
+    allow_bit_spec: false
+    allow_digit_spec: false
+    allow_index_mod: true
+    max_address_dec: 1023
+  ST:
+    description: "Retentive timer"
+    radix: 10
+    data_type: "TIMER"
+    allow_bit_spec: false
+    allow_digit_spec: false
+    allow_index_mod: true
+    max_address_dec: 1023
+  C:
+    description: "Counter"
+    radix: 10
+    data_type: "COUNTER"
+    allow_bit_spec: false
+    allow_digit_spec: false
+    allow_index_mod: true
+    max_address_dec: 1023
+  LC:
+    description: "Long counter"
+    radix: 10
+    data_type: "COUNTER"
+    allow_bit_spec: false
+    allow_digit_spec: false
+    allow_index_mod: true
+    max_address_dec: 1023
+  Z:
+    description: "Index register"
+    radix: 10
+    data_type: "WORD"
+    allow_bit_spec: false
+    allow_digit_spec: false
+    allow_index_mod: false
+    max_address_dec: 19
+  V:
+    description: "Long index register"
+    radix: 10
+    data_type: "DWORD"
+    allow_bit_spec: false
+    allow_digit_spec: false
+    allow_index_mod: false
+    max_address_dec: 19

@@ -1,0 +1,3369 @@
+{
+  "page_modality_profile": {
+    "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+    "page_no": 1,
+    "page_width": 841.8898,
+    "page_height": 595.2756,
+    "modality": "HYBRID",
+    "vector_line_count": 58,
+    "text_span_count": 46,
+    "garbled_span_count": 1,
+    "raster_coverage_ratio": 0.0,
+    "characteristic_contact_width_pt": 6.0,
+    "characteristic_stroke_width_pt": 0.6,
+    "tolerance_collinear_pt": 0.9,
+    "tolerance_snap_pt": 1.2,
+    "tolerance_symbol_guard_pt": 3.9,
+    "garbled_bboxes": [
+      {
+        "x0": 177.1075,
+        "y0": 554.0525100000001,
+        "x1": 328.8174999999998,
+        "y1": 561.5525100000001
+      }
+    ]
+  },
+  "rungs": [
+    {
+      "rung_id": "RUNG_0",
+      "rung_index": 0,
+      "step_range": null,
+      "rung_comment": null,
+      "junction_coords": {
+        "J_LEFT": [
+          70.0,
+          115.00000000000003
+        ],
+        "J_RIGHT": [
+          760.0,
+          115.00000000000003
+        ],
+        "J_0_1": [
+          235.33,
+          104.2
+        ],
+        "J_0_2": [
+          503.0,
+          88.0
+        ]
+      },
+      "left_rail_junction": "J_LEFT",
+      "right_rail_junction": "J_RIGHT",
+      "geometry_nodes": [
+        {
+          "symbol_id": "SYM_CONT_1",
+          "symbol_kind": "NO_CONTACT",
+          "mnemonic": "AND",
+          "device": {
+            "raw_text": "X0",
+            "device_type": "X",
+            "base_address": "0",
+            "radix": 8,
+            "address_int": 0,
+            "bit_index": null,
+            "digit_k": null,
+            "index_reg": null,
+            "data_type": "BOOL",
+            "is_constant": false,
+            "cpu_profile": "FX5U",
+            "is_valid": true,
+            "validation_error": null
+          },
+          "operands": [
+            {
+              "raw_text": "X0",
+              "device_type": "X",
+              "base_address": "0",
+              "radix": 8,
+              "address_int": 0,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            }
+          ],
+          "comment_text": "START_PB",
+          "left_port_coord": [
+            157.0,
+            88.00000000000003
+          ],
+          "right_port_coord": [
+            163.0,
+            88.00000000000003
+          ],
+          "anchor": {
+            "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+            "page_no": 1,
+            "bbox": {
+              "x0": 157.0,
+              "y0": 81.0,
+              "x1": 163.0,
+              "y1": 95.00000000000006
+            },
+            "source_modality": "vector",
+            "confidence": 1.0,
+            "raw_primitive_ids": [
+              "L_p1_3",
+              "L_p1_4",
+              "T_p1_9"
+            ]
+          }
+        },
+        {
+          "symbol_id": "SYM_CONT_2",
+          "symbol_kind": "NC_CONTACT",
+          "mnemonic": "ANI",
+          "device": {
+            "raw_text": "X1",
+            "device_type": "X",
+            "base_address": "1",
+            "radix": 8,
+            "address_int": 1,
+            "bit_index": null,
+            "digit_k": null,
+            "index_reg": null,
+            "data_type": "BOOL",
+            "is_constant": false,
+            "cpu_profile": "FX5U",
+            "is_valid": true,
+            "validation_error": null
+          },
+          "operands": [
+            {
+              "raw_text": "X1",
+              "device_type": "X",
+              "base_address": "1",
+              "radix": 8,
+              "address_int": 1,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            }
+          ],
+          "comment_text": "STOP_PB",
+          "left_port_coord": [
+            327.0,
+            88.00000000000003
+          ],
+          "right_port_coord": [
+            333.0,
+            88.00000000000003
+          ],
+          "anchor": {
+            "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+            "page_no": 1,
+            "bbox": {
+              "x0": 327.0,
+              "y0": 81.0,
+              "x1": 333.0,
+              "y1": 95.00000000000006
+            },
+            "source_modality": "vector",
+            "confidence": 1.0,
+            "raw_primitive_ids": [
+              "L_p1_5",
+              "L_p1_6",
+              "L_p1_7",
+              "T_p1_12"
+            ]
+          }
+        },
+        {
+          "symbol_id": "SYM_COIL_1",
+          "symbol_kind": "OUT_COIL",
+          "mnemonic": "OUT",
+          "device": {
+            "raw_text": "Y0",
+            "device_type": "Y",
+            "base_address": "0",
+            "radix": 8,
+            "address_int": 0,
+            "bit_index": null,
+            "digit_k": null,
+            "index_reg": null,
+            "data_type": "BOOL",
+            "is_constant": false,
+            "cpu_profile": "FX5U",
+            "is_valid": true,
+            "validation_error": null
+          },
+          "operands": [
+            {
+              "raw_text": "Y0",
+              "device_type": "Y",
+              "base_address": "0",
+              "radix": 8,
+              "address_int": 0,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            }
+          ],
+          "comment_text": "MAIN_MOTOR",
+          "left_port_coord": [
+            671.5,
+            88.00000000000003
+          ],
+          "right_port_coord": [
+            688.5,
+            88.00000000000003
+          ],
+          "anchor": {
+            "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+            "page_no": 1,
+            "bbox": {
+              "x0": 671.5,
+              "y0": 81.0,
+              "x1": 688.5,
+              "y1": 95.00000000000006
+            },
+            "source_modality": "vector",
+            "confidence": 1.0,
+            "raw_primitive_ids": [
+              "C_p1_1",
+              "C_p1_2",
+              "T_p1_14"
+            ]
+          }
+        },
+        {
+          "symbol_id": "SYM_CONT_3",
+          "symbol_kind": "NO_CONTACT",
+          "mnemonic": "AND",
+          "device": {
+            "raw_text": "Y0",
+            "device_type": "Y",
+            "base_address": "0",
+            "radix": 8,
+            "address_int": 0,
+            "bit_index": null,
+            "digit_k": null,
+            "index_reg": null,
+            "data_type": "BOOL",
+            "is_constant": false,
+            "cpu_profile": "FX5U",
+            "is_valid": true,
+            "validation_error": null
+          },
+          "operands": [
+            {
+              "raw_text": "Y0",
+              "device_type": "Y",
+              "base_address": "0",
+              "radix": 8,
+              "address_int": 0,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            }
+          ],
+          "comment_text": "SEAL_IN",
+          "left_port_coord": [
+            157.0,
+            142.00000000000006
+          ],
+          "right_port_coord": [
+            163.0,
+            142.00000000000006
+          ],
+          "anchor": {
+            "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+            "page_no": 1,
+            "bbox": {
+              "x0": 157.0,
+              "y0": 135.00000000000006,
+              "x1": 163.0,
+              "y1": 149.00000000000006
+            },
+            "source_modality": "vector",
+            "confidence": 1.0,
+            "raw_primitive_ids": [
+              "L_p1_8",
+              "L_p1_9",
+              "T_p1_16"
+            ]
+          }
+        }
+      ],
+      "geometry_edges": [
+        {
+          "edge_id": "E_0_1",
+          "source_node": "J_LEFT",
+          "target_node": "J_0_1",
+          "symbol": {
+            "symbol_id": "SYM_CONT_1",
+            "symbol_kind": "NO_CONTACT",
+            "mnemonic": "AND",
+            "device": {
+              "raw_text": "X0",
+              "device_type": "X",
+              "base_address": "0",
+              "radix": 8,
+              "address_int": 0,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            },
+            "operands": [
+              {
+                "raw_text": "X0",
+                "device_type": "X",
+                "base_address": "0",
+                "radix": 8,
+                "address_int": 0,
+                "bit_index": null,
+                "digit_k": null,
+                "index_reg": null,
+                "data_type": "BOOL",
+                "is_constant": false,
+                "cpu_profile": "FX5U",
+                "is_valid": true,
+                "validation_error": null
+              }
+            ],
+            "comment_text": "START_PB",
+            "left_port_coord": [
+              157.0,
+              88.00000000000003
+            ],
+            "right_port_coord": [
+              163.0,
+              88.00000000000003
+            ],
+            "anchor": {
+              "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+              "page_no": 1,
+              "bbox": {
+                "x0": 157.0,
+                "y0": 81.0,
+                "x1": 163.0,
+                "y1": 95.00000000000006
+              },
+              "source_modality": "vector",
+              "confidence": 1.0,
+              "raw_primitive_ids": [
+                "L_p1_3",
+                "L_p1_4",
+                "T_p1_9"
+              ]
+            }
+          }
+        },
+        {
+          "edge_id": "E_0_2",
+          "source_node": "J_0_1",
+          "target_node": "J_0_2",
+          "symbol": {
+            "symbol_id": "SYM_CONT_2",
+            "symbol_kind": "NC_CONTACT",
+            "mnemonic": "ANI",
+            "device": {
+              "raw_text": "X1",
+              "device_type": "X",
+              "base_address": "1",
+              "radix": 8,
+              "address_int": 1,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            },
+            "operands": [
+              {
+                "raw_text": "X1",
+                "device_type": "X",
+                "base_address": "1",
+                "radix": 8,
+                "address_int": 1,
+                "bit_index": null,
+                "digit_k": null,
+                "index_reg": null,
+                "data_type": "BOOL",
+                "is_constant": false,
+                "cpu_profile": "FX5U",
+                "is_valid": true,
+                "validation_error": null
+              }
+            ],
+            "comment_text": "STOP_PB",
+            "left_port_coord": [
+              327.0,
+              88.00000000000003
+            ],
+            "right_port_coord": [
+              333.0,
+              88.00000000000003
+            ],
+            "anchor": {
+              "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+              "page_no": 1,
+              "bbox": {
+                "x0": 327.0,
+                "y0": 81.0,
+                "x1": 333.0,
+                "y1": 95.00000000000006
+              },
+              "source_modality": "vector",
+              "confidence": 1.0,
+              "raw_primitive_ids": [
+                "L_p1_5",
+                "L_p1_6",
+                "L_p1_7",
+                "T_p1_12"
+              ]
+            }
+          }
+        },
+        {
+          "edge_id": "E_0_3",
+          "source_node": "J_0_2",
+          "target_node": "J_RIGHT",
+          "symbol": {
+            "symbol_id": "SYM_COIL_1",
+            "symbol_kind": "OUT_COIL",
+            "mnemonic": "OUT",
+            "device": {
+              "raw_text": "Y0",
+              "device_type": "Y",
+              "base_address": "0",
+              "radix": 8,
+              "address_int": 0,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            },
+            "operands": [
+              {
+                "raw_text": "Y0",
+                "device_type": "Y",
+                "base_address": "0",
+                "radix": 8,
+                "address_int": 0,
+                "bit_index": null,
+                "digit_k": null,
+                "index_reg": null,
+                "data_type": "BOOL",
+                "is_constant": false,
+                "cpu_profile": "FX5U",
+                "is_valid": true,
+                "validation_error": null
+              }
+            ],
+            "comment_text": "MAIN_MOTOR",
+            "left_port_coord": [
+              671.5,
+              88.00000000000003
+            ],
+            "right_port_coord": [
+              688.5,
+              88.00000000000003
+            ],
+            "anchor": {
+              "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+              "page_no": 1,
+              "bbox": {
+                "x0": 671.5,
+                "y0": 81.0,
+                "x1": 688.5,
+                "y1": 95.00000000000006
+              },
+              "source_modality": "vector",
+              "confidence": 1.0,
+              "raw_primitive_ids": [
+                "C_p1_1",
+                "C_p1_2",
+                "T_p1_14"
+              ]
+            }
+          }
+        },
+        {
+          "edge_id": "E_0_4",
+          "source_node": "J_LEFT",
+          "target_node": "J_0_1",
+          "symbol": {
+            "symbol_id": "SYM_CONT_3",
+            "symbol_kind": "NO_CONTACT",
+            "mnemonic": "AND",
+            "device": {
+              "raw_text": "Y0",
+              "device_type": "Y",
+              "base_address": "0",
+              "radix": 8,
+              "address_int": 0,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            },
+            "operands": [
+              {
+                "raw_text": "Y0",
+                "device_type": "Y",
+                "base_address": "0",
+                "radix": 8,
+                "address_int": 0,
+                "bit_index": null,
+                "digit_k": null,
+                "index_reg": null,
+                "data_type": "BOOL",
+                "is_constant": false,
+                "cpu_profile": "FX5U",
+                "is_valid": true,
+                "validation_error": null
+              }
+            ],
+            "comment_text": "SEAL_IN",
+            "left_port_coord": [
+              157.0,
+              142.00000000000006
+            ],
+            "right_port_coord": [
+              163.0,
+              142.00000000000006
+            ],
+            "anchor": {
+              "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+              "page_no": 1,
+              "bbox": {
+                "x0": 157.0,
+                "y0": 135.00000000000006,
+                "x1": 163.0,
+                "y1": 149.00000000000006
+              },
+              "source_modality": "vector",
+              "confidence": 1.0,
+              "raw_primitive_ids": [
+                "L_p1_8",
+                "L_p1_9",
+                "T_p1_16"
+              ]
+            }
+          }
+        }
+      ],
+      "merge_audit_logs": [
+        {
+          "merge_id": "M_r0_1",
+          "page_no": 1,
+          "primitive_a_id": "L_p1_15",
+          "primitive_b_id": "L_p1_16",
+          "point_a": [
+            275.0,
+            88.00000000000006
+          ],
+          "point_b": [
+            275.35,
+            88.00000000000006
+          ],
+          "euclidean_distance_pt": 0.35,
+          "applied_tolerance_pt": 1.2,
+          "rule_name": "collinear_stitch"
+        }
+      ],
+      "instruction_sequence": [
+        {
+          "step_no": 1,
+          "opcode": "LD",
+          "operands": [
+            "X0"
+          ],
+          "source_symbol_id": "SYM_CONT_1",
+          "stack_depth_after": 0
+        },
+        {
+          "step_no": 2,
+          "opcode": "OR",
+          "operands": [
+            "Y0"
+          ],
+          "source_symbol_id": "SYM_CONT_3",
+          "stack_depth_after": 0
+        },
+        {
+          "step_no": 3,
+          "opcode": "ANI",
+          "operands": [
+            "X1"
+          ],
+          "source_symbol_id": "SYM_CONT_2",
+          "stack_depth_after": 0
+        },
+        {
+          "step_no": 4,
+          "opcode": "OUT",
+          "operands": [
+            "Y0"
+          ],
+          "source_symbol_id": "SYM_COIL_1",
+          "stack_depth_after": 0
+        }
+      ],
+      "guarded_statements": [
+        {
+          "exec_order": 1,
+          "enable_condition": {
+            "expr_type": "AND",
+            "operator": null,
+            "device_ref": null,
+            "symbol_id": null,
+            "children": [
+              {
+                "expr_type": "OR",
+                "operator": null,
+                "device_ref": null,
+                "symbol_id": null,
+                "children": [
+                  {
+                    "expr_type": "ATOM",
+                    "operator": "X0",
+                    "device_ref": {
+                      "raw_text": "X0",
+                      "device_type": "X",
+                      "base_address": "0",
+                      "radix": 8,
+                      "address_int": 0,
+                      "bit_index": null,
+                      "digit_k": null,
+                      "index_reg": null,
+                      "data_type": "BOOL",
+                      "is_constant": false,
+                      "cpu_profile": "FX5U",
+                      "is_valid": true,
+                      "validation_error": null
+                    },
+                    "symbol_id": "SYM_CONT_1",
+                    "children": [],
+                    "anchor_ids": [
+                      "SYM_CONT_1"
+                    ]
+                  },
+                  {
+                    "expr_type": "ATOM",
+                    "operator": "Y0",
+                    "device_ref": {
+                      "raw_text": "Y0",
+                      "device_type": "Y",
+                      "base_address": "0",
+                      "radix": 8,
+                      "address_int": 0,
+                      "bit_index": null,
+                      "digit_k": null,
+                      "index_reg": null,
+                      "data_type": "BOOL",
+                      "is_constant": false,
+                      "cpu_profile": "FX5U",
+                      "is_valid": true,
+                      "validation_error": null
+                    },
+                    "symbol_id": "SYM_CONT_3",
+                    "children": [],
+                    "anchor_ids": [
+                      "SYM_CONT_3"
+                    ]
+                  }
+                ],
+                "anchor_ids": [
+                  "SYM_CONT_1",
+                  "SYM_CONT_3"
+                ]
+              },
+              {
+                "expr_type": "NOT",
+                "operator": null,
+                "device_ref": null,
+                "symbol_id": "SYM_CONT_2",
+                "children": [
+                  {
+                    "expr_type": "ATOM",
+                    "operator": "X1",
+                    "device_ref": {
+                      "raw_text": "X1",
+                      "device_type": "X",
+                      "base_address": "1",
+                      "radix": 8,
+                      "address_int": 1,
+                      "bit_index": null,
+                      "digit_k": null,
+                      "index_reg": null,
+                      "data_type": "BOOL",
+                      "is_constant": false,
+                      "cpu_profile": "FX5U",
+                      "is_valid": true,
+                      "validation_error": null
+                    },
+                    "symbol_id": "SYM_CONT_2",
+                    "children": [],
+                    "anchor_ids": [
+                      "SYM_CONT_2"
+                    ]
+                  }
+                ],
+                "anchor_ids": [
+                  "SYM_CONT_2"
+                ]
+              }
+            ],
+            "anchor_ids": [
+              "SYM_CONT_1",
+              "SYM_CONT_3",
+              "SYM_CONT_2"
+            ]
+          },
+          "action_kind": "COIL_OUT",
+          "mnemonic": "OUT",
+          "target_device": {
+            "raw_text": "Y0",
+            "device_type": "Y",
+            "base_address": "0",
+            "radix": 8,
+            "address_int": 0,
+            "bit_index": null,
+            "digit_k": null,
+            "index_reg": null,
+            "data_type": "BOOL",
+            "is_constant": false,
+            "cpu_profile": "FX5U",
+            "is_valid": true,
+            "validation_error": null
+          },
+          "operands": [
+            {
+              "raw_text": "Y0",
+              "device_type": "Y",
+              "base_address": "0",
+              "radix": 8,
+              "address_int": 0,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            }
+          ],
+          "is_stateful": false,
+          "anchor": {
+            "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+            "page_no": 1,
+            "bbox": {
+              "x0": 671.5,
+              "y0": 81.0,
+              "x1": 688.5,
+              "y1": 95.00000000000006
+            },
+            "source_modality": "vector",
+            "confidence": 1.0,
+            "raw_primitive_ids": [
+              "C_p1_1",
+              "C_p1_2",
+              "T_p1_14"
+            ]
+          }
+        }
+      ],
+      "verification_status": "VERIFIED",
+      "diagnostics": [],
+      "anchor": {
+        "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+        "page_no": 1,
+        "bbox": {
+          "x0": 70.0,
+          "y0": 66.0,
+          "x1": 760.0,
+          "y1": 164.00000000000006
+        },
+        "source_modality": "vector",
+        "confidence": 1.0,
+        "raw_primitive_ids": [
+          "L_p1_10",
+          "L_p1_11",
+          "L_p1_12",
+          "L_p1_13",
+          "L_p1_14",
+          "L_p1_15",
+          "L_p1_16",
+          "L_p1_17",
+          "L_p1_18"
+        ]
+      }
+    },
+    {
+      "rung_id": "RUNG_1",
+      "rung_index": 1,
+      "step_range": null,
+      "rung_comment": null,
+      "junction_coords": {
+        "J_LEFT": [
+          70.0,
+          306.50000000000006
+        ],
+        "J_RIGHT": [
+          760.0,
+          306.50000000000006
+        ],
+        "J_1_1": [
+          215.25,
+          244.88
+        ],
+        "J_1_2": [
+          383.12,
+          278.06
+        ],
+        "J_1_3": [
+          578.0,
+          225.0
+        ],
+        "J_1_4": [
+          559.0,
+          330.0
+        ]
+      },
+      "left_rail_junction": "J_LEFT",
+      "right_rail_junction": "J_RIGHT",
+      "geometry_nodes": [
+        {
+          "symbol_id": "SYM_CONT_4",
+          "symbol_kind": "NO_CONTACT",
+          "mnemonic": "AND",
+          "device": {
+            "raw_text": "X2",
+            "device_type": "X",
+            "base_address": "2",
+            "radix": 8,
+            "address_int": 2,
+            "bit_index": null,
+            "digit_k": null,
+            "index_reg": null,
+            "data_type": "BOOL",
+            "is_constant": false,
+            "cpu_profile": "FX5U",
+            "is_valid": true,
+            "validation_error": null
+          },
+          "operands": [
+            {
+              "raw_text": "X2",
+              "device_type": "X",
+              "base_address": "2",
+              "radix": 8,
+              "address_int": 2,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            }
+          ],
+          "comment_text": "AUTO_MODE",
+          "left_port_coord": [
+            132.0,
+            225.00000000000006
+          ],
+          "right_port_coord": [
+            138.0,
+            225.00000000000006
+          ],
+          "anchor": {
+            "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+            "page_no": 1,
+            "bbox": {
+              "x0": 132.0,
+              "y0": 218.00000000000006,
+              "x1": 138.0,
+              "y1": 232.00000000000006
+            },
+            "source_modality": "vector",
+            "confidence": 1.0,
+            "raw_primitive_ids": [
+              "L_p1_19",
+              "L_p1_20",
+              "T_p1_18"
+            ]
+          }
+        },
+        {
+          "symbol_id": "SYM_CONT_5",
+          "symbol_kind": "NO_CONTACT",
+          "mnemonic": "AND",
+          "device": {
+            "raw_text": "X3",
+            "device_type": "X",
+            "base_address": "3",
+            "radix": 8,
+            "address_int": 3,
+            "bit_index": null,
+            "digit_k": null,
+            "index_reg": null,
+            "data_type": "BOOL",
+            "is_constant": false,
+            "cpu_profile": "FX5U",
+            "is_valid": true,
+            "validation_error": null
+          },
+          "operands": [
+            {
+              "raw_text": "X3",
+              "device_type": "X",
+              "base_address": "3",
+              "radix": 8,
+              "address_int": 3,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            }
+          ],
+          "comment_text": "PART_OK",
+          "left_port_coord": [
+            267.0,
+            225.00000000000006
+          ],
+          "right_port_coord": [
+            273.0,
+            225.00000000000006
+          ],
+          "anchor": {
+            "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+            "page_no": 1,
+            "bbox": {
+              "x0": 267.0,
+              "y0": 218.00000000000006,
+              "x1": 273.0,
+              "y1": 232.00000000000006
+            },
+            "source_modality": "vector",
+            "confidence": 1.0,
+            "raw_primitive_ids": [
+              "L_p1_21",
+              "L_p1_22",
+              "T_p1_21"
+            ]
+          }
+        },
+        {
+          "symbol_id": "SYM_CONT_6",
+          "symbol_kind": "NO_CONTACT",
+          "mnemonic": "AND",
+          "device": {
+            "raw_text": "X4",
+            "device_type": "X",
+            "base_address": "4",
+            "radix": 8,
+            "address_int": 4,
+            "bit_index": null,
+            "digit_k": null,
+            "index_reg": null,
+            "data_type": "BOOL",
+            "is_constant": false,
+            "cpu_profile": "FX5U",
+            "is_valid": true,
+            "validation_error": null
+          },
+          "operands": [
+            {
+              "raw_text": "X4",
+              "device_type": "X",
+              "base_address": "4",
+              "radix": 8,
+              "address_int": 4,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            }
+          ],
+          "comment_text": "CLAMP_SW",
+          "left_port_coord": [
+            477.0,
+            225.00000000000006
+          ],
+          "right_port_coord": [
+            483.0,
+            225.00000000000006
+          ],
+          "anchor": {
+            "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+            "page_no": 1,
+            "bbox": {
+              "x0": 477.0,
+              "y0": 218.00000000000006,
+              "x1": 483.0,
+              "y1": 232.00000000000006
+            },
+            "source_modality": "vector",
+            "confidence": 1.0,
+            "raw_primitive_ids": [
+              "L_p1_35",
+              "L_p1_36",
+              "T_p1_25"
+            ]
+          }
+        },
+        {
+          "symbol_id": "SYM_COIL_2",
+          "symbol_kind": "OUT_COIL",
+          "mnemonic": "OUT",
+          "device": {
+            "raw_text": "Y10",
+            "device_type": "Y",
+            "base_address": "10",
+            "radix": 8,
+            "address_int": 8,
+            "bit_index": null,
+            "digit_k": null,
+            "index_reg": null,
+            "data_type": "BOOL",
+            "is_constant": false,
+            "cpu_profile": "FX5U",
+            "is_valid": true,
+            "validation_error": null
+          },
+          "operands": [
+            {
+              "raw_text": "Y10",
+              "device_type": "Y",
+              "base_address": "10",
+              "radix": 8,
+              "address_int": 8,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            }
+          ],
+          "comment_text": "CLAMP_VALVE",
+          "left_port_coord": [
+            671.5,
+            225.00000000000006
+          ],
+          "right_port_coord": [
+            688.5,
+            225.00000000000006
+          ],
+          "anchor": {
+            "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+            "page_no": 1,
+            "bbox": {
+              "x0": 671.5,
+              "y0": 218.00000000000006,
+              "x1": 688.5,
+              "y1": 232.00000000000006
+            },
+            "source_modality": "vector",
+            "confidence": 1.0,
+            "raw_primitive_ids": [
+              "C_p1_3",
+              "C_p1_4",
+              "T_p1_27"
+            ]
+          }
+        },
+        {
+          "symbol_id": "SYM_CONT_7",
+          "symbol_kind": "NO_CONTACT",
+          "mnemonic": "AND",
+          "device": {
+            "raw_text": "M0",
+            "device_type": "M",
+            "base_address": "0",
+            "radix": 10,
+            "address_int": 0,
+            "bit_index": null,
+            "digit_k": null,
+            "index_reg": null,
+            "data_type": "BOOL",
+            "is_constant": false,
+            "cpu_profile": "FX5U",
+            "is_valid": true,
+            "validation_error": null
+          },
+          "operands": [
+            {
+              "raw_text": "M0",
+              "device_type": "M",
+              "base_address": "0",
+              "radix": 10,
+              "address_int": 0,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            }
+          ],
+          "comment_text": "BYPASS",
+          "left_port_coord": [
+            267.0,
+            278.00000000000006
+          ],
+          "right_port_coord": [
+            273.0,
+            278.00000000000006
+          ],
+          "anchor": {
+            "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+            "page_no": 1,
+            "bbox": {
+              "x0": 267.0,
+              "y0": 271.00000000000006,
+              "x1": 273.0,
+              "y1": 285.00000000000006
+            },
+            "source_modality": "vector",
+            "confidence": 1.0,
+            "raw_primitive_ids": [
+              "L_p1_23",
+              "L_p1_24",
+              "T_p1_23"
+            ]
+          }
+        },
+        {
+          "symbol_id": "SYM_CONT_8",
+          "symbol_kind": "NC_CONTACT",
+          "mnemonic": "ANI",
+          "device": {
+            "raw_text": "X5",
+            "device_type": "X",
+            "base_address": "5",
+            "radix": 8,
+            "address_int": 5,
+            "bit_index": null,
+            "digit_k": null,
+            "index_reg": null,
+            "data_type": "BOOL",
+            "is_constant": false,
+            "cpu_profile": "FX5U",
+            "is_valid": true,
+            "validation_error": null
+          },
+          "operands": [
+            {
+              "raw_text": "X5",
+              "device_type": "X",
+              "base_address": "5",
+              "radix": 8,
+              "address_int": 5,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            }
+          ],
+          "comment_text": "FAULT_IN",
+          "left_port_coord": [
+            477.0,
+            330.00000000000006
+          ],
+          "right_port_coord": [
+            483.0,
+            330.00000000000006
+          ],
+          "anchor": {
+            "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+            "page_no": 1,
+            "bbox": {
+              "x0": 477.0,
+              "y0": 323.00000000000006,
+              "x1": 483.0,
+              "y1": 337.00000000000006
+            },
+            "source_modality": "vector",
+            "confidence": 1.0,
+            "raw_primitive_ids": [
+              "L_p1_40",
+              "L_p1_41",
+              "L_p1_42",
+              "T_p1_29"
+            ]
+          }
+        },
+        {
+          "symbol_id": "SYM_BOX_1",
+          "symbol_kind": "SET_COIL",
+          "mnemonic": "SET",
+          "device": {
+            "raw_text": "M10",
+            "device_type": "M",
+            "base_address": "10",
+            "radix": 10,
+            "address_int": 10,
+            "bit_index": null,
+            "digit_k": null,
+            "index_reg": null,
+            "data_type": "BOOL",
+            "is_constant": false,
+            "cpu_profile": "FX5U",
+            "is_valid": true,
+            "validation_error": null
+          },
+          "operands": [
+            {
+              "raw_text": "M10",
+              "device_type": "M",
+              "base_address": "10",
+              "radix": 10,
+              "address_int": 10,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            }
+          ],
+          "comment_text": "CYCLE_LATCH",
+          "left_port_coord": [
+            635.0,
+            330.00000000000006
+          ],
+          "right_port_coord": [
+            715.0,
+            330.00000000000006
+          ],
+          "anchor": {
+            "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+            "page_no": 1,
+            "bbox": {
+              "x0": 635.0,
+              "y0": 320.00000000000006,
+              "x1": 715.0,
+              "y1": 340.00000000000006
+            },
+            "source_modality": "vector",
+            "confidence": 1.0,
+            "raw_primitive_ids": [
+              "R_p1_1",
+              "T_p1_31",
+              "T_p1_32"
+            ]
+          }
+        },
+        {
+          "symbol_id": "SYM_BOX_2",
+          "symbol_kind": "FUNC_BLOCK",
+          "mnemonic": "MOV",
+          "device": {
+            "raw_text": "D0",
+            "device_type": "D",
+            "base_address": "0",
+            "radix": 10,
+            "address_int": 0,
+            "bit_index": null,
+            "digit_k": null,
+            "index_reg": null,
+            "data_type": "WORD",
+            "is_constant": false,
+            "cpu_profile": "FX5U",
+            "is_valid": true,
+            "validation_error": null
+          },
+          "operands": [
+            {
+              "raw_text": "K100",
+              "device_type": "K",
+              "base_address": "100",
+              "radix": 10,
+              "address_int": 100,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "CONSTANT",
+              "is_constant": true,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            },
+            {
+              "raw_text": "D0",
+              "device_type": "D",
+              "base_address": "0",
+              "radix": 10,
+              "address_int": 0,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "WORD",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            }
+          ],
+          "comment_text": "INIT_SPEED",
+          "left_port_coord": [
+            615.0,
+            385.00000000000006
+          ],
+          "right_port_coord": [
+            715.0,
+            385.00000000000006
+          ],
+          "anchor": {
+            "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+            "page_no": 1,
+            "bbox": {
+              "x0": 615.0,
+              "y0": 375.00000000000006,
+              "x1": 715.0,
+              "y1": 395.00000000000006
+            },
+            "source_modality": "vector",
+            "confidence": 1.0,
+            "raw_primitive_ids": [
+              "R_p1_2",
+              "T_p1_34",
+              "T_p1_35",
+              "T_p1_36"
+            ]
+          }
+        }
+      ],
+      "geometry_edges": [
+        {
+          "edge_id": "E_1_1",
+          "source_node": "J_LEFT",
+          "target_node": "J_1_1",
+          "symbol": {
+            "symbol_id": "SYM_CONT_4",
+            "symbol_kind": "NO_CONTACT",
+            "mnemonic": "AND",
+            "device": {
+              "raw_text": "X2",
+              "device_type": "X",
+              "base_address": "2",
+              "radix": 8,
+              "address_int": 2,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            },
+            "operands": [
+              {
+                "raw_text": "X2",
+                "device_type": "X",
+                "base_address": "2",
+                "radix": 8,
+                "address_int": 2,
+                "bit_index": null,
+                "digit_k": null,
+                "index_reg": null,
+                "data_type": "BOOL",
+                "is_constant": false,
+                "cpu_profile": "FX5U",
+                "is_valid": true,
+                "validation_error": null
+              }
+            ],
+            "comment_text": "AUTO_MODE",
+            "left_port_coord": [
+              132.0,
+              225.00000000000006
+            ],
+            "right_port_coord": [
+              138.0,
+              225.00000000000006
+            ],
+            "anchor": {
+              "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+              "page_no": 1,
+              "bbox": {
+                "x0": 132.0,
+                "y0": 218.00000000000006,
+                "x1": 138.0,
+                "y1": 232.00000000000006
+              },
+              "source_modality": "vector",
+              "confidence": 1.0,
+              "raw_primitive_ids": [
+                "L_p1_19",
+                "L_p1_20",
+                "T_p1_18"
+              ]
+            }
+          }
+        },
+        {
+          "edge_id": "E_1_2",
+          "source_node": "J_1_1",
+          "target_node": "J_1_2",
+          "symbol": {
+            "symbol_id": "SYM_CONT_5",
+            "symbol_kind": "NO_CONTACT",
+            "mnemonic": "AND",
+            "device": {
+              "raw_text": "X3",
+              "device_type": "X",
+              "base_address": "3",
+              "radix": 8,
+              "address_int": 3,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            },
+            "operands": [
+              {
+                "raw_text": "X3",
+                "device_type": "X",
+                "base_address": "3",
+                "radix": 8,
+                "address_int": 3,
+                "bit_index": null,
+                "digit_k": null,
+                "index_reg": null,
+                "data_type": "BOOL",
+                "is_constant": false,
+                "cpu_profile": "FX5U",
+                "is_valid": true,
+                "validation_error": null
+              }
+            ],
+            "comment_text": "PART_OK",
+            "left_port_coord": [
+              267.0,
+              225.00000000000006
+            ],
+            "right_port_coord": [
+              273.0,
+              225.00000000000006
+            ],
+            "anchor": {
+              "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+              "page_no": 1,
+              "bbox": {
+                "x0": 267.0,
+                "y0": 218.00000000000006,
+                "x1": 273.0,
+                "y1": 232.00000000000006
+              },
+              "source_modality": "vector",
+              "confidence": 1.0,
+              "raw_primitive_ids": [
+                "L_p1_21",
+                "L_p1_22",
+                "T_p1_21"
+              ]
+            }
+          }
+        },
+        {
+          "edge_id": "E_1_3",
+          "source_node": "J_1_2",
+          "target_node": "J_1_3",
+          "symbol": {
+            "symbol_id": "SYM_CONT_6",
+            "symbol_kind": "NO_CONTACT",
+            "mnemonic": "AND",
+            "device": {
+              "raw_text": "X4",
+              "device_type": "X",
+              "base_address": "4",
+              "radix": 8,
+              "address_int": 4,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            },
+            "operands": [
+              {
+                "raw_text": "X4",
+                "device_type": "X",
+                "base_address": "4",
+                "radix": 8,
+                "address_int": 4,
+                "bit_index": null,
+                "digit_k": null,
+                "index_reg": null,
+                "data_type": "BOOL",
+                "is_constant": false,
+                "cpu_profile": "FX5U",
+                "is_valid": true,
+                "validation_error": null
+              }
+            ],
+            "comment_text": "CLAMP_SW",
+            "left_port_coord": [
+              477.0,
+              225.00000000000006
+            ],
+            "right_port_coord": [
+              483.0,
+              225.00000000000006
+            ],
+            "anchor": {
+              "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+              "page_no": 1,
+              "bbox": {
+                "x0": 477.0,
+                "y0": 218.00000000000006,
+                "x1": 483.0,
+                "y1": 232.00000000000006
+              },
+              "source_modality": "vector",
+              "confidence": 1.0,
+              "raw_primitive_ids": [
+                "L_p1_35",
+                "L_p1_36",
+                "T_p1_25"
+              ]
+            }
+          }
+        },
+        {
+          "edge_id": "E_1_4",
+          "source_node": "J_1_3",
+          "target_node": "J_RIGHT",
+          "symbol": {
+            "symbol_id": "SYM_COIL_2",
+            "symbol_kind": "OUT_COIL",
+            "mnemonic": "OUT",
+            "device": {
+              "raw_text": "Y10",
+              "device_type": "Y",
+              "base_address": "10",
+              "radix": 8,
+              "address_int": 8,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            },
+            "operands": [
+              {
+                "raw_text": "Y10",
+                "device_type": "Y",
+                "base_address": "10",
+                "radix": 8,
+                "address_int": 8,
+                "bit_index": null,
+                "digit_k": null,
+                "index_reg": null,
+                "data_type": "BOOL",
+                "is_constant": false,
+                "cpu_profile": "FX5U",
+                "is_valid": true,
+                "validation_error": null
+              }
+            ],
+            "comment_text": "CLAMP_VALVE",
+            "left_port_coord": [
+              671.5,
+              225.00000000000006
+            ],
+            "right_port_coord": [
+              688.5,
+              225.00000000000006
+            ],
+            "anchor": {
+              "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+              "page_no": 1,
+              "bbox": {
+                "x0": 671.5,
+                "y0": 218.00000000000006,
+                "x1": 688.5,
+                "y1": 232.00000000000006
+              },
+              "source_modality": "vector",
+              "confidence": 1.0,
+              "raw_primitive_ids": [
+                "C_p1_3",
+                "C_p1_4",
+                "T_p1_27"
+              ]
+            }
+          }
+        },
+        {
+          "edge_id": "E_1_5",
+          "source_node": "J_1_1",
+          "target_node": "J_1_2",
+          "symbol": {
+            "symbol_id": "SYM_CONT_7",
+            "symbol_kind": "NO_CONTACT",
+            "mnemonic": "AND",
+            "device": {
+              "raw_text": "M0",
+              "device_type": "M",
+              "base_address": "0",
+              "radix": 10,
+              "address_int": 0,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            },
+            "operands": [
+              {
+                "raw_text": "M0",
+                "device_type": "M",
+                "base_address": "0",
+                "radix": 10,
+                "address_int": 0,
+                "bit_index": null,
+                "digit_k": null,
+                "index_reg": null,
+                "data_type": "BOOL",
+                "is_constant": false,
+                "cpu_profile": "FX5U",
+                "is_valid": true,
+                "validation_error": null
+              }
+            ],
+            "comment_text": "BYPASS",
+            "left_port_coord": [
+              267.0,
+              278.00000000000006
+            ],
+            "right_port_coord": [
+              273.0,
+              278.00000000000006
+            ],
+            "anchor": {
+              "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+              "page_no": 1,
+              "bbox": {
+                "x0": 267.0,
+                "y0": 271.00000000000006,
+                "x1": 273.0,
+                "y1": 285.00000000000006
+              },
+              "source_modality": "vector",
+              "confidence": 1.0,
+              "raw_primitive_ids": [
+                "L_p1_23",
+                "L_p1_24",
+                "T_p1_23"
+              ]
+            }
+          }
+        },
+        {
+          "edge_id": "E_1_6",
+          "source_node": "J_1_2",
+          "target_node": "J_1_4",
+          "symbol": {
+            "symbol_id": "SYM_CONT_8",
+            "symbol_kind": "NC_CONTACT",
+            "mnemonic": "ANI",
+            "device": {
+              "raw_text": "X5",
+              "device_type": "X",
+              "base_address": "5",
+              "radix": 8,
+              "address_int": 5,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            },
+            "operands": [
+              {
+                "raw_text": "X5",
+                "device_type": "X",
+                "base_address": "5",
+                "radix": 8,
+                "address_int": 5,
+                "bit_index": null,
+                "digit_k": null,
+                "index_reg": null,
+                "data_type": "BOOL",
+                "is_constant": false,
+                "cpu_profile": "FX5U",
+                "is_valid": true,
+                "validation_error": null
+              }
+            ],
+            "comment_text": "FAULT_IN",
+            "left_port_coord": [
+              477.0,
+              330.00000000000006
+            ],
+            "right_port_coord": [
+              483.0,
+              330.00000000000006
+            ],
+            "anchor": {
+              "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+              "page_no": 1,
+              "bbox": {
+                "x0": 477.0,
+                "y0": 323.00000000000006,
+                "x1": 483.0,
+                "y1": 337.00000000000006
+              },
+              "source_modality": "vector",
+              "confidence": 1.0,
+              "raw_primitive_ids": [
+                "L_p1_40",
+                "L_p1_41",
+                "L_p1_42",
+                "T_p1_29"
+              ]
+            }
+          }
+        },
+        {
+          "edge_id": "E_1_7",
+          "source_node": "J_1_4",
+          "target_node": "J_RIGHT",
+          "symbol": {
+            "symbol_id": "SYM_BOX_1",
+            "symbol_kind": "SET_COIL",
+            "mnemonic": "SET",
+            "device": {
+              "raw_text": "M10",
+              "device_type": "M",
+              "base_address": "10",
+              "radix": 10,
+              "address_int": 10,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            },
+            "operands": [
+              {
+                "raw_text": "M10",
+                "device_type": "M",
+                "base_address": "10",
+                "radix": 10,
+                "address_int": 10,
+                "bit_index": null,
+                "digit_k": null,
+                "index_reg": null,
+                "data_type": "BOOL",
+                "is_constant": false,
+                "cpu_profile": "FX5U",
+                "is_valid": true,
+                "validation_error": null
+              }
+            ],
+            "comment_text": "CYCLE_LATCH",
+            "left_port_coord": [
+              635.0,
+              330.00000000000006
+            ],
+            "right_port_coord": [
+              715.0,
+              330.00000000000006
+            ],
+            "anchor": {
+              "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+              "page_no": 1,
+              "bbox": {
+                "x0": 635.0,
+                "y0": 320.00000000000006,
+                "x1": 715.0,
+                "y1": 340.00000000000006
+              },
+              "source_modality": "vector",
+              "confidence": 1.0,
+              "raw_primitive_ids": [
+                "R_p1_1",
+                "T_p1_31",
+                "T_p1_32"
+              ]
+            }
+          }
+        },
+        {
+          "edge_id": "E_1_8",
+          "source_node": "J_1_2",
+          "target_node": "J_RIGHT",
+          "symbol": {
+            "symbol_id": "SYM_BOX_2",
+            "symbol_kind": "FUNC_BLOCK",
+            "mnemonic": "MOV",
+            "device": {
+              "raw_text": "D0",
+              "device_type": "D",
+              "base_address": "0",
+              "radix": 10,
+              "address_int": 0,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "WORD",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            },
+            "operands": [
+              {
+                "raw_text": "K100",
+                "device_type": "K",
+                "base_address": "100",
+                "radix": 10,
+                "address_int": 100,
+                "bit_index": null,
+                "digit_k": null,
+                "index_reg": null,
+                "data_type": "CONSTANT",
+                "is_constant": true,
+                "cpu_profile": "FX5U",
+                "is_valid": true,
+                "validation_error": null
+              },
+              {
+                "raw_text": "D0",
+                "device_type": "D",
+                "base_address": "0",
+                "radix": 10,
+                "address_int": 0,
+                "bit_index": null,
+                "digit_k": null,
+                "index_reg": null,
+                "data_type": "WORD",
+                "is_constant": false,
+                "cpu_profile": "FX5U",
+                "is_valid": true,
+                "validation_error": null
+              }
+            ],
+            "comment_text": "INIT_SPEED",
+            "left_port_coord": [
+              615.0,
+              385.00000000000006
+            ],
+            "right_port_coord": [
+              715.0,
+              385.00000000000006
+            ],
+            "anchor": {
+              "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+              "page_no": 1,
+              "bbox": {
+                "x0": 615.0,
+                "y0": 375.00000000000006,
+                "x1": 715.0,
+                "y1": 395.00000000000006
+              },
+              "source_modality": "vector",
+              "confidence": 1.0,
+              "raw_primitive_ids": [
+                "R_p1_2",
+                "T_p1_34",
+                "T_p1_35",
+                "T_p1_36"
+              ]
+            }
+          }
+        }
+      ],
+      "merge_audit_logs": [],
+      "instruction_sequence": [
+        {
+          "step_no": 1,
+          "opcode": "LD",
+          "operands": [
+            "X2"
+          ],
+          "source_symbol_id": "SYM_CONT_4",
+          "stack_depth_after": 0
+        },
+        {
+          "step_no": 2,
+          "opcode": "AND",
+          "operands": [
+            "X3"
+          ],
+          "source_symbol_id": "SYM_CONT_5",
+          "stack_depth_after": 0
+        },
+        {
+          "step_no": 3,
+          "opcode": "LD",
+          "operands": [
+            "X2"
+          ],
+          "source_symbol_id": "SYM_CONT_4",
+          "stack_depth_after": 0
+        },
+        {
+          "step_no": 4,
+          "opcode": "AND",
+          "operands": [
+            "M0"
+          ],
+          "source_symbol_id": "SYM_CONT_7",
+          "stack_depth_after": 0
+        },
+        {
+          "step_no": 5,
+          "opcode": "ORB",
+          "operands": [],
+          "source_symbol_id": null,
+          "stack_depth_after": 0
+        },
+        {
+          "step_no": 6,
+          "opcode": "MPS",
+          "operands": [],
+          "source_symbol_id": null,
+          "stack_depth_after": 1
+        },
+        {
+          "step_no": 7,
+          "opcode": "AND",
+          "operands": [
+            "X4"
+          ],
+          "source_symbol_id": "SYM_CONT_6",
+          "stack_depth_after": 1
+        },
+        {
+          "step_no": 8,
+          "opcode": "OUT",
+          "operands": [
+            "Y10"
+          ],
+          "source_symbol_id": "SYM_COIL_2",
+          "stack_depth_after": 1
+        },
+        {
+          "step_no": 9,
+          "opcode": "MRD",
+          "operands": [],
+          "source_symbol_id": null,
+          "stack_depth_after": 1
+        },
+        {
+          "step_no": 10,
+          "opcode": "ANI",
+          "operands": [
+            "X5"
+          ],
+          "source_symbol_id": "SYM_CONT_8",
+          "stack_depth_after": 1
+        },
+        {
+          "step_no": 11,
+          "opcode": "SET",
+          "operands": [
+            "M10"
+          ],
+          "source_symbol_id": "SYM_BOX_1",
+          "stack_depth_after": 1
+        },
+        {
+          "step_no": 12,
+          "opcode": "MPP",
+          "operands": [],
+          "source_symbol_id": null,
+          "stack_depth_after": 0
+        },
+        {
+          "step_no": 13,
+          "opcode": "MOV",
+          "operands": [
+            "K100",
+            "D0"
+          ],
+          "source_symbol_id": "SYM_BOX_2",
+          "stack_depth_after": 0
+        }
+      ],
+      "guarded_statements": [
+        {
+          "exec_order": 1,
+          "enable_condition": {
+            "expr_type": "AND",
+            "operator": null,
+            "device_ref": null,
+            "symbol_id": null,
+            "children": [
+              {
+                "expr_type": "OR",
+                "operator": null,
+                "device_ref": null,
+                "symbol_id": null,
+                "children": [
+                  {
+                    "expr_type": "AND",
+                    "operator": null,
+                    "device_ref": null,
+                    "symbol_id": null,
+                    "children": [
+                      {
+                        "expr_type": "ATOM",
+                        "operator": "X2",
+                        "device_ref": {
+                          "raw_text": "X2",
+                          "device_type": "X",
+                          "base_address": "2",
+                          "radix": 8,
+                          "address_int": 2,
+                          "bit_index": null,
+                          "digit_k": null,
+                          "index_reg": null,
+                          "data_type": "BOOL",
+                          "is_constant": false,
+                          "cpu_profile": "FX5U",
+                          "is_valid": true,
+                          "validation_error": null
+                        },
+                        "symbol_id": "SYM_CONT_4",
+                        "children": [],
+                        "anchor_ids": [
+                          "SYM_CONT_4"
+                        ]
+                      },
+                      {
+                        "expr_type": "ATOM",
+                        "operator": "X3",
+                        "device_ref": {
+                          "raw_text": "X3",
+                          "device_type": "X",
+                          "base_address": "3",
+                          "radix": 8,
+                          "address_int": 3,
+                          "bit_index": null,
+                          "digit_k": null,
+                          "index_reg": null,
+                          "data_type": "BOOL",
+                          "is_constant": false,
+                          "cpu_profile": "FX5U",
+                          "is_valid": true,
+                          "validation_error": null
+                        },
+                        "symbol_id": "SYM_CONT_5",
+                        "children": [],
+                        "anchor_ids": [
+                          "SYM_CONT_5"
+                        ]
+                      }
+                    ],
+                    "anchor_ids": [
+                      "SYM_CONT_4",
+                      "SYM_CONT_5"
+                    ]
+                  },
+                  {
+                    "expr_type": "AND",
+                    "operator": null,
+                    "device_ref": null,
+                    "symbol_id": null,
+                    "children": [
+                      {
+                        "expr_type": "ATOM",
+                        "operator": "X2",
+                        "device_ref": {
+                          "raw_text": "X2",
+                          "device_type": "X",
+                          "base_address": "2",
+                          "radix": 8,
+                          "address_int": 2,
+                          "bit_index": null,
+                          "digit_k": null,
+                          "index_reg": null,
+                          "data_type": "BOOL",
+                          "is_constant": false,
+                          "cpu_profile": "FX5U",
+                          "is_valid": true,
+                          "validation_error": null
+                        },
+                        "symbol_id": "SYM_CONT_4",
+                        "children": [],
+                        "anchor_ids": [
+                          "SYM_CONT_4"
+                        ]
+                      },
+                      {
+                        "expr_type": "ATOM",
+                        "operator": "M0",
+                        "device_ref": {
+                          "raw_text": "M0",
+                          "device_type": "M",
+                          "base_address": "0",
+                          "radix": 10,
+                          "address_int": 0,
+                          "bit_index": null,
+                          "digit_k": null,
+                          "index_reg": null,
+                          "data_type": "BOOL",
+                          "is_constant": false,
+                          "cpu_profile": "FX5U",
+                          "is_valid": true,
+                          "validation_error": null
+                        },
+                        "symbol_id": "SYM_CONT_7",
+                        "children": [],
+                        "anchor_ids": [
+                          "SYM_CONT_7"
+                        ]
+                      }
+                    ],
+                    "anchor_ids": [
+                      "SYM_CONT_4",
+                      "SYM_CONT_7"
+                    ]
+                  }
+                ],
+                "anchor_ids": [
+                  "SYM_CONT_4",
+                  "SYM_CONT_5",
+                  "SYM_CONT_4",
+                  "SYM_CONT_7"
+                ]
+              },
+              {
+                "expr_type": "ATOM",
+                "operator": "X4",
+                "device_ref": {
+                  "raw_text": "X4",
+                  "device_type": "X",
+                  "base_address": "4",
+                  "radix": 8,
+                  "address_int": 4,
+                  "bit_index": null,
+                  "digit_k": null,
+                  "index_reg": null,
+                  "data_type": "BOOL",
+                  "is_constant": false,
+                  "cpu_profile": "FX5U",
+                  "is_valid": true,
+                  "validation_error": null
+                },
+                "symbol_id": "SYM_CONT_6",
+                "children": [],
+                "anchor_ids": [
+                  "SYM_CONT_6"
+                ]
+              }
+            ],
+            "anchor_ids": [
+              "SYM_CONT_4",
+              "SYM_CONT_5",
+              "SYM_CONT_4",
+              "SYM_CONT_7",
+              "SYM_CONT_6"
+            ]
+          },
+          "action_kind": "COIL_OUT",
+          "mnemonic": "OUT",
+          "target_device": {
+            "raw_text": "Y10",
+            "device_type": "Y",
+            "base_address": "10",
+            "radix": 8,
+            "address_int": 8,
+            "bit_index": null,
+            "digit_k": null,
+            "index_reg": null,
+            "data_type": "BOOL",
+            "is_constant": false,
+            "cpu_profile": "FX5U",
+            "is_valid": true,
+            "validation_error": null
+          },
+          "operands": [
+            {
+              "raw_text": "Y10",
+              "device_type": "Y",
+              "base_address": "10",
+              "radix": 8,
+              "address_int": 8,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            }
+          ],
+          "is_stateful": false,
+          "anchor": {
+            "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+            "page_no": 1,
+            "bbox": {
+              "x0": 671.5,
+              "y0": 218.00000000000006,
+              "x1": 688.5,
+              "y1": 232.00000000000006
+            },
+            "source_modality": "vector",
+            "confidence": 1.0,
+            "raw_primitive_ids": [
+              "C_p1_3",
+              "C_p1_4",
+              "T_p1_27"
+            ]
+          }
+        },
+        {
+          "exec_order": 2,
+          "enable_condition": {
+            "expr_type": "AND",
+            "operator": null,
+            "device_ref": null,
+            "symbol_id": null,
+            "children": [
+              {
+                "expr_type": "OR",
+                "operator": null,
+                "device_ref": null,
+                "symbol_id": null,
+                "children": [
+                  {
+                    "expr_type": "AND",
+                    "operator": null,
+                    "device_ref": null,
+                    "symbol_id": null,
+                    "children": [
+                      {
+                        "expr_type": "ATOM",
+                        "operator": "X2",
+                        "device_ref": {
+                          "raw_text": "X2",
+                          "device_type": "X",
+                          "base_address": "2",
+                          "radix": 8,
+                          "address_int": 2,
+                          "bit_index": null,
+                          "digit_k": null,
+                          "index_reg": null,
+                          "data_type": "BOOL",
+                          "is_constant": false,
+                          "cpu_profile": "FX5U",
+                          "is_valid": true,
+                          "validation_error": null
+                        },
+                        "symbol_id": "SYM_CONT_4",
+                        "children": [],
+                        "anchor_ids": [
+                          "SYM_CONT_4"
+                        ]
+                      },
+                      {
+                        "expr_type": "ATOM",
+                        "operator": "X3",
+                        "device_ref": {
+                          "raw_text": "X3",
+                          "device_type": "X",
+                          "base_address": "3",
+                          "radix": 8,
+                          "address_int": 3,
+                          "bit_index": null,
+                          "digit_k": null,
+                          "index_reg": null,
+                          "data_type": "BOOL",
+                          "is_constant": false,
+                          "cpu_profile": "FX5U",
+                          "is_valid": true,
+                          "validation_error": null
+                        },
+                        "symbol_id": "SYM_CONT_5",
+                        "children": [],
+                        "anchor_ids": [
+                          "SYM_CONT_5"
+                        ]
+                      }
+                    ],
+                    "anchor_ids": [
+                      "SYM_CONT_4",
+                      "SYM_CONT_5"
+                    ]
+                  },
+                  {
+                    "expr_type": "AND",
+                    "operator": null,
+                    "device_ref": null,
+                    "symbol_id": null,
+                    "children": [
+                      {
+                        "expr_type": "ATOM",
+                        "operator": "X2",
+                        "device_ref": {
+                          "raw_text": "X2",
+                          "device_type": "X",
+                          "base_address": "2",
+                          "radix": 8,
+                          "address_int": 2,
+                          "bit_index": null,
+                          "digit_k": null,
+                          "index_reg": null,
+                          "data_type": "BOOL",
+                          "is_constant": false,
+                          "cpu_profile": "FX5U",
+                          "is_valid": true,
+                          "validation_error": null
+                        },
+                        "symbol_id": "SYM_CONT_4",
+                        "children": [],
+                        "anchor_ids": [
+                          "SYM_CONT_4"
+                        ]
+                      },
+                      {
+                        "expr_type": "ATOM",
+                        "operator": "M0",
+                        "device_ref": {
+                          "raw_text": "M0",
+                          "device_type": "M",
+                          "base_address": "0",
+                          "radix": 10,
+                          "address_int": 0,
+                          "bit_index": null,
+                          "digit_k": null,
+                          "index_reg": null,
+                          "data_type": "BOOL",
+                          "is_constant": false,
+                          "cpu_profile": "FX5U",
+                          "is_valid": true,
+                          "validation_error": null
+                        },
+                        "symbol_id": "SYM_CONT_7",
+                        "children": [],
+                        "anchor_ids": [
+                          "SYM_CONT_7"
+                        ]
+                      }
+                    ],
+                    "anchor_ids": [
+                      "SYM_CONT_4",
+                      "SYM_CONT_7"
+                    ]
+                  }
+                ],
+                "anchor_ids": [
+                  "SYM_CONT_4",
+                  "SYM_CONT_5",
+                  "SYM_CONT_4",
+                  "SYM_CONT_7"
+                ]
+              },
+              {
+                "expr_type": "NOT",
+                "operator": null,
+                "device_ref": null,
+                "symbol_id": "SYM_CONT_8",
+                "children": [
+                  {
+                    "expr_type": "ATOM",
+                    "operator": "X5",
+                    "device_ref": {
+                      "raw_text": "X5",
+                      "device_type": "X",
+                      "base_address": "5",
+                      "radix": 8,
+                      "address_int": 5,
+                      "bit_index": null,
+                      "digit_k": null,
+                      "index_reg": null,
+                      "data_type": "BOOL",
+                      "is_constant": false,
+                      "cpu_profile": "FX5U",
+                      "is_valid": true,
+                      "validation_error": null
+                    },
+                    "symbol_id": "SYM_CONT_8",
+                    "children": [],
+                    "anchor_ids": [
+                      "SYM_CONT_8"
+                    ]
+                  }
+                ],
+                "anchor_ids": [
+                  "SYM_CONT_8"
+                ]
+              }
+            ],
+            "anchor_ids": [
+              "SYM_CONT_4",
+              "SYM_CONT_5",
+              "SYM_CONT_4",
+              "SYM_CONT_7",
+              "SYM_CONT_8"
+            ]
+          },
+          "action_kind": "COIL_SET",
+          "mnemonic": "SET",
+          "target_device": {
+            "raw_text": "M10",
+            "device_type": "M",
+            "base_address": "10",
+            "radix": 10,
+            "address_int": 10,
+            "bit_index": null,
+            "digit_k": null,
+            "index_reg": null,
+            "data_type": "BOOL",
+            "is_constant": false,
+            "cpu_profile": "FX5U",
+            "is_valid": true,
+            "validation_error": null
+          },
+          "operands": [
+            {
+              "raw_text": "M10",
+              "device_type": "M",
+              "base_address": "10",
+              "radix": 10,
+              "address_int": 10,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            }
+          ],
+          "is_stateful": true,
+          "anchor": {
+            "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+            "page_no": 1,
+            "bbox": {
+              "x0": 635.0,
+              "y0": 320.00000000000006,
+              "x1": 715.0,
+              "y1": 340.00000000000006
+            },
+            "source_modality": "vector",
+            "confidence": 1.0,
+            "raw_primitive_ids": [
+              "R_p1_1",
+              "T_p1_31",
+              "T_p1_32"
+            ]
+          }
+        },
+        {
+          "exec_order": 3,
+          "enable_condition": {
+            "expr_type": "OR",
+            "operator": null,
+            "device_ref": null,
+            "symbol_id": null,
+            "children": [
+              {
+                "expr_type": "AND",
+                "operator": null,
+                "device_ref": null,
+                "symbol_id": null,
+                "children": [
+                  {
+                    "expr_type": "ATOM",
+                    "operator": "X2",
+                    "device_ref": {
+                      "raw_text": "X2",
+                      "device_type": "X",
+                      "base_address": "2",
+                      "radix": 8,
+                      "address_int": 2,
+                      "bit_index": null,
+                      "digit_k": null,
+                      "index_reg": null,
+                      "data_type": "BOOL",
+                      "is_constant": false,
+                      "cpu_profile": "FX5U",
+                      "is_valid": true,
+                      "validation_error": null
+                    },
+                    "symbol_id": "SYM_CONT_4",
+                    "children": [],
+                    "anchor_ids": [
+                      "SYM_CONT_4"
+                    ]
+                  },
+                  {
+                    "expr_type": "ATOM",
+                    "operator": "X3",
+                    "device_ref": {
+                      "raw_text": "X3",
+                      "device_type": "X",
+                      "base_address": "3",
+                      "radix": 8,
+                      "address_int": 3,
+                      "bit_index": null,
+                      "digit_k": null,
+                      "index_reg": null,
+                      "data_type": "BOOL",
+                      "is_constant": false,
+                      "cpu_profile": "FX5U",
+                      "is_valid": true,
+                      "validation_error": null
+                    },
+                    "symbol_id": "SYM_CONT_5",
+                    "children": [],
+                    "anchor_ids": [
+                      "SYM_CONT_5"
+                    ]
+                  }
+                ],
+                "anchor_ids": [
+                  "SYM_CONT_4",
+                  "SYM_CONT_5"
+                ]
+              },
+              {
+                "expr_type": "AND",
+                "operator": null,
+                "device_ref": null,
+                "symbol_id": null,
+                "children": [
+                  {
+                    "expr_type": "ATOM",
+                    "operator": "X2",
+                    "device_ref": {
+                      "raw_text": "X2",
+                      "device_type": "X",
+                      "base_address": "2",
+                      "radix": 8,
+                      "address_int": 2,
+                      "bit_index": null,
+                      "digit_k": null,
+                      "index_reg": null,
+                      "data_type": "BOOL",
+                      "is_constant": false,
+                      "cpu_profile": "FX5U",
+                      "is_valid": true,
+                      "validation_error": null
+                    },
+                    "symbol_id": "SYM_CONT_4",
+                    "children": [],
+                    "anchor_ids": [
+                      "SYM_CONT_4"
+                    ]
+                  },
+                  {
+                    "expr_type": "ATOM",
+                    "operator": "M0",
+                    "device_ref": {
+                      "raw_text": "M0",
+                      "device_type": "M",
+                      "base_address": "0",
+                      "radix": 10,
+                      "address_int": 0,
+                      "bit_index": null,
+                      "digit_k": null,
+                      "index_reg": null,
+                      "data_type": "BOOL",
+                      "is_constant": false,
+                      "cpu_profile": "FX5U",
+                      "is_valid": true,
+                      "validation_error": null
+                    },
+                    "symbol_id": "SYM_CONT_7",
+                    "children": [],
+                    "anchor_ids": [
+                      "SYM_CONT_7"
+                    ]
+                  }
+                ],
+                "anchor_ids": [
+                  "SYM_CONT_4",
+                  "SYM_CONT_7"
+                ]
+              }
+            ],
+            "anchor_ids": [
+              "SYM_CONT_4",
+              "SYM_CONT_5",
+              "SYM_CONT_4",
+              "SYM_CONT_7"
+            ]
+          },
+          "action_kind": "FUNC_EXEC",
+          "mnemonic": "MOV",
+          "target_device": {
+            "raw_text": "D0",
+            "device_type": "D",
+            "base_address": "0",
+            "radix": 10,
+            "address_int": 0,
+            "bit_index": null,
+            "digit_k": null,
+            "index_reg": null,
+            "data_type": "WORD",
+            "is_constant": false,
+            "cpu_profile": "FX5U",
+            "is_valid": true,
+            "validation_error": null
+          },
+          "operands": [
+            {
+              "raw_text": "K100",
+              "device_type": "K",
+              "base_address": "100",
+              "radix": 10,
+              "address_int": 100,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "CONSTANT",
+              "is_constant": true,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            },
+            {
+              "raw_text": "D0",
+              "device_type": "D",
+              "base_address": "0",
+              "radix": 10,
+              "address_int": 0,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "WORD",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            }
+          ],
+          "is_stateful": true,
+          "anchor": {
+            "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+            "page_no": 1,
+            "bbox": {
+              "x0": 615.0,
+              "y0": 375.00000000000006,
+              "x1": 715.0,
+              "y1": 395.00000000000006
+            },
+            "source_modality": "vector",
+            "confidence": 1.0,
+            "raw_primitive_ids": [
+              "R_p1_2",
+              "T_p1_34",
+              "T_p1_35",
+              "T_p1_36"
+            ]
+          }
+        }
+      ],
+      "verification_status": "VERIFIED",
+      "diagnostics": [],
+      "anchor": {
+        "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+        "page_no": 1,
+        "bbox": {
+          "x0": 70.0,
+          "y0": 203.00000000000006,
+          "x1": 760.0,
+          "y1": 410.00000000000006
+        },
+        "source_modality": "vector",
+        "confidence": 1.0,
+        "raw_primitive_ids": [
+          "L_p1_25",
+          "L_p1_26",
+          "L_p1_27",
+          "L_p1_28",
+          "L_p1_29",
+          "L_p1_30",
+          "L_p1_31",
+          "L_p1_32",
+          "L_p1_33",
+          "L_p1_34",
+          "L_p1_37",
+          "L_p1_38",
+          "L_p1_39",
+          "L_p1_43",
+          "L_p1_44",
+          "L_p1_45",
+          "L_p1_46",
+          "L_p1_47"
+        ]
+      }
+    },
+    {
+      "rung_id": "RUNG_2",
+      "rung_index": 2,
+      "step_range": null,
+      "rung_comment": null,
+      "junction_coords": {
+        "J_LEFT": [
+          70.0,
+          468.00000000000006
+        ],
+        "J_RIGHT": [
+          760.0,
+          468.00000000000006
+        ],
+        "J_2_1": [
+          260.0,
+          468.0
+        ],
+        "J_2_2": [
+          508.0,
+          468.0
+        ]
+      },
+      "left_rail_junction": "J_LEFT",
+      "right_rail_junction": "J_RIGHT",
+      "geometry_nodes": [
+        {
+          "symbol_id": "SYM_CONT_9",
+          "symbol_kind": "RISE_CONTACT",
+          "mnemonic": "ANDP",
+          "device": {
+            "raw_text": "X10",
+            "device_type": "X",
+            "base_address": "10",
+            "radix": 8,
+            "address_int": 8,
+            "bit_index": null,
+            "digit_k": null,
+            "index_reg": null,
+            "data_type": "BOOL",
+            "is_constant": false,
+            "cpu_profile": "FX5U",
+            "is_valid": true,
+            "validation_error": null
+          },
+          "operands": [
+            {
+              "raw_text": "X10",
+              "device_type": "X",
+              "base_address": "10",
+              "radix": 8,
+              "address_int": 8,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            }
+          ],
+          "comment_text": "TRIG_PULSE",
+          "left_port_coord": [
+            177.0,
+            468.00000000000006
+          ],
+          "right_port_coord": [
+            183.0,
+            468.00000000000006
+          ],
+          "anchor": {
+            "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+            "page_no": 1,
+            "bbox": {
+              "x0": 177.0,
+              "y0": 461.00000000000006,
+              "x1": 183.0,
+              "y1": 475.00000000000006
+            },
+            "source_modality": "vector",
+            "confidence": 1.0,
+            "raw_primitive_ids": [
+              "L_p1_48",
+              "L_p1_49",
+              "L_p1_50",
+              "L_p1_51",
+              "L_p1_52",
+              "T_p1_38"
+            ]
+          }
+        },
+        {
+          "symbol_id": "SYM_CONT_10",
+          "symbol_kind": "NO_CONTACT",
+          "mnemonic": "AND",
+          "device": {
+            "raw_text": "D100.A",
+            "device_type": "D",
+            "base_address": "100",
+            "radix": 10,
+            "address_int": 100,
+            "bit_index": 10,
+            "digit_k": null,
+            "index_reg": null,
+            "data_type": "BOOL",
+            "is_constant": false,
+            "cpu_profile": "FX5U",
+            "is_valid": true,
+            "validation_error": null
+          },
+          "operands": [
+            {
+              "raw_text": "D100.A",
+              "device_type": "D",
+              "base_address": "100",
+              "radix": 10,
+              "address_int": 100,
+              "bit_index": 10,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            }
+          ],
+          "comment_text": "STATUS_BIT10",
+          "left_port_coord": [
+            337.0,
+            468.00000000000006
+          ],
+          "right_port_coord": [
+            343.0,
+            468.00000000000006
+          ],
+          "anchor": {
+            "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+            "page_no": 1,
+            "bbox": {
+              "x0": 337.0,
+              "y0": 461.00000000000006,
+              "x1": 343.0,
+              "y1": 475.00000000000006
+            },
+            "source_modality": "vector",
+            "confidence": 1.0,
+            "raw_primitive_ids": [
+              "L_p1_53",
+              "L_p1_54",
+              "T_p1_41"
+            ]
+          }
+        },
+        {
+          "symbol_id": "SYM_COIL_3",
+          "symbol_kind": "OUT_COIL",
+          "mnemonic": "OUT",
+          "device": {
+            "raw_text": "Y17",
+            "device_type": "Y",
+            "base_address": "17",
+            "radix": 8,
+            "address_int": 15,
+            "bit_index": null,
+            "digit_k": null,
+            "index_reg": null,
+            "data_type": "BOOL",
+            "is_constant": false,
+            "cpu_profile": "FX5U",
+            "is_valid": true,
+            "validation_error": null
+          },
+          "operands": [
+            {
+              "raw_text": "Y17",
+              "device_type": "Y",
+              "base_address": "17",
+              "radix": 8,
+              "address_int": 15,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            }
+          ],
+          "comment_text": "DONE_LAMP",
+          "left_port_coord": [
+            671.5,
+            468.00000000000006
+          ],
+          "right_port_coord": [
+            688.5,
+            468.00000000000006
+          ],
+          "anchor": {
+            "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+            "page_no": 1,
+            "bbox": {
+              "x0": 671.5,
+              "y0": 461.00000000000006,
+              "x1": 688.5,
+              "y1": 475.00000000000006
+            },
+            "source_modality": "vector",
+            "confidence": 1.0,
+            "raw_primitive_ids": [
+              "C_p1_5",
+              "C_p1_6",
+              "T_p1_43"
+            ]
+          }
+        }
+      ],
+      "geometry_edges": [
+        {
+          "edge_id": "E_2_1",
+          "source_node": "J_LEFT",
+          "target_node": "J_2_1",
+          "symbol": {
+            "symbol_id": "SYM_CONT_9",
+            "symbol_kind": "RISE_CONTACT",
+            "mnemonic": "ANDP",
+            "device": {
+              "raw_text": "X10",
+              "device_type": "X",
+              "base_address": "10",
+              "radix": 8,
+              "address_int": 8,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            },
+            "operands": [
+              {
+                "raw_text": "X10",
+                "device_type": "X",
+                "base_address": "10",
+                "radix": 8,
+                "address_int": 8,
+                "bit_index": null,
+                "digit_k": null,
+                "index_reg": null,
+                "data_type": "BOOL",
+                "is_constant": false,
+                "cpu_profile": "FX5U",
+                "is_valid": true,
+                "validation_error": null
+              }
+            ],
+            "comment_text": "TRIG_PULSE",
+            "left_port_coord": [
+              177.0,
+              468.00000000000006
+            ],
+            "right_port_coord": [
+              183.0,
+              468.00000000000006
+            ],
+            "anchor": {
+              "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+              "page_no": 1,
+              "bbox": {
+                "x0": 177.0,
+                "y0": 461.00000000000006,
+                "x1": 183.0,
+                "y1": 475.00000000000006
+              },
+              "source_modality": "vector",
+              "confidence": 1.0,
+              "raw_primitive_ids": [
+                "L_p1_48",
+                "L_p1_49",
+                "L_p1_50",
+                "L_p1_51",
+                "L_p1_52",
+                "T_p1_38"
+              ]
+            }
+          }
+        },
+        {
+          "edge_id": "E_2_2",
+          "source_node": "J_2_1",
+          "target_node": "J_2_2",
+          "symbol": {
+            "symbol_id": "SYM_CONT_10",
+            "symbol_kind": "NO_CONTACT",
+            "mnemonic": "AND",
+            "device": {
+              "raw_text": "D100.A",
+              "device_type": "D",
+              "base_address": "100",
+              "radix": 10,
+              "address_int": 100,
+              "bit_index": 10,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            },
+            "operands": [
+              {
+                "raw_text": "D100.A",
+                "device_type": "D",
+                "base_address": "100",
+                "radix": 10,
+                "address_int": 100,
+                "bit_index": 10,
+                "digit_k": null,
+                "index_reg": null,
+                "data_type": "BOOL",
+                "is_constant": false,
+                "cpu_profile": "FX5U",
+                "is_valid": true,
+                "validation_error": null
+              }
+            ],
+            "comment_text": "STATUS_BIT10",
+            "left_port_coord": [
+              337.0,
+              468.00000000000006
+            ],
+            "right_port_coord": [
+              343.0,
+              468.00000000000006
+            ],
+            "anchor": {
+              "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+              "page_no": 1,
+              "bbox": {
+                "x0": 337.0,
+                "y0": 461.00000000000006,
+                "x1": 343.0,
+                "y1": 475.00000000000006
+              },
+              "source_modality": "vector",
+              "confidence": 1.0,
+              "raw_primitive_ids": [
+                "L_p1_53",
+                "L_p1_54",
+                "T_p1_41"
+              ]
+            }
+          }
+        },
+        {
+          "edge_id": "E_2_3",
+          "source_node": "J_2_2",
+          "target_node": "J_RIGHT",
+          "symbol": {
+            "symbol_id": "SYM_COIL_3",
+            "symbol_kind": "OUT_COIL",
+            "mnemonic": "OUT",
+            "device": {
+              "raw_text": "Y17",
+              "device_type": "Y",
+              "base_address": "17",
+              "radix": 8,
+              "address_int": 15,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            },
+            "operands": [
+              {
+                "raw_text": "Y17",
+                "device_type": "Y",
+                "base_address": "17",
+                "radix": 8,
+                "address_int": 15,
+                "bit_index": null,
+                "digit_k": null,
+                "index_reg": null,
+                "data_type": "BOOL",
+                "is_constant": false,
+                "cpu_profile": "FX5U",
+                "is_valid": true,
+                "validation_error": null
+              }
+            ],
+            "comment_text": "DONE_LAMP",
+            "left_port_coord": [
+              671.5,
+              468.00000000000006
+            ],
+            "right_port_coord": [
+              688.5,
+              468.00000000000006
+            ],
+            "anchor": {
+              "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+              "page_no": 1,
+              "bbox": {
+                "x0": 671.5,
+                "y0": 461.00000000000006,
+                "x1": 688.5,
+                "y1": 475.00000000000006
+              },
+              "source_modality": "vector",
+              "confidence": 1.0,
+              "raw_primitive_ids": [
+                "C_p1_5",
+                "C_p1_6",
+                "T_p1_43"
+              ]
+            }
+          }
+        }
+      ],
+      "merge_audit_logs": [],
+      "instruction_sequence": [
+        {
+          "step_no": 1,
+          "opcode": "LDP",
+          "operands": [
+            "X10"
+          ],
+          "source_symbol_id": "SYM_CONT_9",
+          "stack_depth_after": 0
+        },
+        {
+          "step_no": 2,
+          "opcode": "AND",
+          "operands": [
+            "D100.A"
+          ],
+          "source_symbol_id": "SYM_CONT_10",
+          "stack_depth_after": 0
+        },
+        {
+          "step_no": 3,
+          "opcode": "OUT",
+          "operands": [
+            "Y17"
+          ],
+          "source_symbol_id": "SYM_COIL_3",
+          "stack_depth_after": 0
+        }
+      ],
+      "guarded_statements": [
+        {
+          "exec_order": 1,
+          "enable_condition": {
+            "expr_type": "AND",
+            "operator": null,
+            "device_ref": null,
+            "symbol_id": null,
+            "children": [
+              {
+                "expr_type": "RISE_EDGE",
+                "operator": null,
+                "device_ref": {
+                  "raw_text": "X10",
+                  "device_type": "X",
+                  "base_address": "10",
+                  "radix": 8,
+                  "address_int": 8,
+                  "bit_index": null,
+                  "digit_k": null,
+                  "index_reg": null,
+                  "data_type": "BOOL",
+                  "is_constant": false,
+                  "cpu_profile": "FX5U",
+                  "is_valid": true,
+                  "validation_error": null
+                },
+                "symbol_id": "SYM_CONT_9",
+                "children": [],
+                "anchor_ids": [
+                  "SYM_CONT_9"
+                ]
+              },
+              {
+                "expr_type": "ATOM",
+                "operator": "D100.A",
+                "device_ref": {
+                  "raw_text": "D100.A",
+                  "device_type": "D",
+                  "base_address": "100",
+                  "radix": 10,
+                  "address_int": 100,
+                  "bit_index": 10,
+                  "digit_k": null,
+                  "index_reg": null,
+                  "data_type": "BOOL",
+                  "is_constant": false,
+                  "cpu_profile": "FX5U",
+                  "is_valid": true,
+                  "validation_error": null
+                },
+                "symbol_id": "SYM_CONT_10",
+                "children": [],
+                "anchor_ids": [
+                  "SYM_CONT_10"
+                ]
+              }
+            ],
+            "anchor_ids": [
+              "SYM_CONT_9",
+              "SYM_CONT_10"
+            ]
+          },
+          "action_kind": "COIL_OUT",
+          "mnemonic": "OUT",
+          "target_device": {
+            "raw_text": "Y17",
+            "device_type": "Y",
+            "base_address": "17",
+            "radix": 8,
+            "address_int": 15,
+            "bit_index": null,
+            "digit_k": null,
+            "index_reg": null,
+            "data_type": "BOOL",
+            "is_constant": false,
+            "cpu_profile": "FX5U",
+            "is_valid": true,
+            "validation_error": null
+          },
+          "operands": [
+            {
+              "raw_text": "Y17",
+              "device_type": "Y",
+              "base_address": "17",
+              "radix": 8,
+              "address_int": 15,
+              "bit_index": null,
+              "digit_k": null,
+              "index_reg": null,
+              "data_type": "BOOL",
+              "is_constant": false,
+              "cpu_profile": "FX5U",
+              "is_valid": true,
+              "validation_error": null
+            }
+          ],
+          "is_stateful": false,
+          "anchor": {
+            "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+            "page_no": 1,
+            "bbox": {
+              "x0": 671.5,
+              "y0": 461.00000000000006,
+              "x1": 688.5,
+              "y1": 475.00000000000006
+            },
+            "source_modality": "vector",
+            "confidence": 1.0,
+            "raw_primitive_ids": [
+              "C_p1_5",
+              "C_p1_6",
+              "T_p1_43"
+            ]
+          }
+        }
+      ],
+      "verification_status": "VERIFIED",
+      "diagnostics": [],
+      "anchor": {
+        "doc_sha256": "cb4d24a15c4c1e2a440b299233fe0b25882fd4d9a3efc19c5f1e98385bd64a95",
+        "page_no": 1,
+        "bbox": {
+          "x0": 70.0,
+          "y0": 446.00000000000006,
+          "x1": 760.0,
+          "y1": 490.00000000000006
+        },
+        "source_modality": "vector",
+        "confidence": 1.0,
+        "raw_primitive_ids": [
+          "L_p1_55",
+          "L_p1_56",
+          "L_p1_57",
+          "L_p1_58"
+        ]
+      }
+    }
+  ],
+  "static_diagnostics": []
+}

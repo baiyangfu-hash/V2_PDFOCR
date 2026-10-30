@@ -1,0 +1,95 @@
+cpu_series: "MELSEC iQ-F"
+cpu_model: "FX5U"
+
+instructions:
+  contact_instructions:
+    - mnemonic: "LD"
+      contact_mode: "NO"
+      operands: ["BIT_DEVICE"]
+    - mnemonic: "LDI"
+      contact_mode: "NC"
+      operands: ["BIT_DEVICE"]
+    - mnemonic: "LDP"
+      contact_mode: "RISE"
+      operands: ["BIT_DEVICE"]
+    - mnemonic: "LDF"
+      contact_mode: "FALL"
+      operands: ["BIT_DEVICE"]
+    - mnemonic: "AND"
+      contact_mode: "NO"
+      operands: ["BIT_DEVICE"]
+    - mnemonic: "ANI"
+      contact_mode: "NC"
+      operands: ["BIT_DEVICE"]
+    - mnemonic: "ANDP"
+      contact_mode: "RISE"
+      operands: ["BIT_DEVICE"]
+    - mnemonic: "ANDF"
+      contact_mode: "FALL"
+      operands: ["BIT_DEVICE"]
+    - mnemonic: "OR"
+      contact_mode: "NO"
+      operands: ["BIT_DEVICE"]
+    - mnemonic: "ORI"
+      contact_mode: "NC"
+      operands: ["BIT_DEVICE"]
+    - mnemonic: "ORP"
+      contact_mode: "RISE"
+      operands: ["BIT_DEVICE"]
+    - mnemonic: "ORF"
+      contact_mode: "FALL"
+      operands: ["BIT_DEVICE"]
+
+  stack_and_branch_instructions:
+    - mnemonic: "ANB"
+      description: "Series connection of ladder blocks"
+    - mnemonic: "ORB"
+      description: "Parallel connection of ladder blocks"
+    - mnemonic: "MPS"
+      description: "Push operation result onto stack (max 11 levels)"
+    - mnemonic: "MRD"
+      description: "Read top of operation result stack without popping"
+    - mnemonic: "MPP"
+      description: "Pop top of operation result stack"
+    - mnemonic: "INV"
+      description: "Invert current operation result"
+
+  output_instructions:
+    - mnemonic: "OUT"
+      action_kind: "COIL_OUT"
+      is_stateful: false
+      operands: ["BIT_OR_TIMER_COUNTER"]
+    - mnemonic: "SET"
+      action_kind: "COIL_SET"
+      is_stateful: true
+      operands: ["BIT_DEVICE"]
+    - mnemonic: "RST"
+      action_kind: "COIL_RST"
+      is_stateful: true
+      operands: ["BIT_OR_WORD_OR_TC"]
+
+  application_instructions:
+    - mnemonic: "MOV"
+      supports_pulse_suffix: true
+      is_stateful: true
+      operands: ["SRC_WORD_OR_CONST", "DST_WORD"]
+    - mnemonic: "DMOV"
+      supports_pulse_suffix: true
+      is_stateful: true
+      operands: ["SRC_DWORD_OR_CONST", "DST_DWORD"]
+    - mnemonic: "BMOV"
+      supports_pulse_suffix: true
+      is_stateful: true
+      operands: ["SRC_WORD", "DST_WORD", "COUNT_CONST"]
+    - mnemonic: "CMP"
+      supports_pulse_suffix: true
+      is_stateful: true
+      operands: ["SRC1", "SRC2", "DST_BIT_3"]
+    - mnemonic: "ADD"
+      supports_pulse_suffix: true
+      is_stateful: true
+      operands: ["SRC1", "SRC2", "DST_WORD"]
+    - mnemonic: "SUB"
+      supports_pulse_suffix: true
+      is_stateful: true
+      operands: ["SRC1", "SRC2", "DST_WORD"]
