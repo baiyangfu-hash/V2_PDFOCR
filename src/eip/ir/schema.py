@@ -349,8 +349,11 @@ class SchematicIOChannelIR(BaseModel):
     component_tags: List[str] = Field(default_factory=list)
     power_circuit_ref: Optional[str] = None
     schematic_label_cn: str = ""
+    schematic_label_en_raw: str = ""
     plc_comment_cn: Optional[str] = None
     authoritative_label_cn: str = ""
+    standardized_en_desc: str = ""
+    iec_symbolic_tag_en: str = ""
     reconciliation_status: Literal[
         "MATCHED",
         "PIN_TYPO_IN_SCHEMATIC",

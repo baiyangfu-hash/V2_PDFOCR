@@ -6,6 +6,8 @@ import unittest
 
 from eip.ingest import (
     ElectricalSchematicParser,
+    SolarFrameTranslationEngine,
+    TableQualityVerifier,
     FBDProgramParser,
     GX3ProjectTableParser,
     STStructuredTextParser,
@@ -463,6 +465,28 @@ class TestP2ElectricalSchematicReconciliation(unittest.TestCase):
                 rule_ids
             )
         )
+
+
+    def test_bilingual_translation_engine_and_5fold_verifier(self) -> None:
+        schem_pdf = self.UPLOAD_DIR / "5.边框储料机.pdf"
+        cmt_pdf = self.UPLOAD_DIR / "05_软元件注释.pdf"
+        if not schem_pdf.exists() or not cmt_pdf.exists():
+            self.skipTest("5.边框储料机.pdf or 05_软元件注释.pdf not attached")
+
+        plc_comments = GX3ProjectTableParser().parse_device_comments(cmt_pdf)
+        channels, _ = ElectricalSchematicParser().parse_and_reconcile(
+            schem_pdf, plc_comments
+        )
+        report = TableQualityVerifier.verify_channels(channels)
+        self.assertTrue(report["passed"], f"5-fold verification failed: {report}")
+        self.assertEqual(report["total_rows"], 176)
+        self.assertEqual(report["cjk_residue_count"], 0)
+
+        ch_map = {c.canonical_device: c for c in channels}
+        self.assertEqual(ch_map["X21"].standardized_en_desc, "L1 Stopper Pre-Prox SW")
+        self.assertEqual(ch_map["X21"].iec_symbolic_tag_en, "DI_X021_SQP1_L1StopperPreProxSW")
+        self.assertEqual(ch_map["X102"].standardized_en_desc, "Gluing Mach Pick Done Sig")
+        self.assertEqual(ch_map["Y47"].standardized_en_desc, "To Gluing Mach Safe Zone Sig")
 
 
 if __name__ == "__main__":
