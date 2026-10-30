@@ -4,14 +4,19 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from eip.ingest import GX3ProjectTableParser
+from eip.ingest import (
+    ElectricalSchematicParser,
+    FBDProgramParser,
+    GX3ProjectTableParser,
+    STStructuredTextParser,
+)
 from eip.ingest.pdf_backend import PdfPlumberBackend, get_default_pdf_backend
 from eip.ingest.profiler import PDFModalityProfiler
 from eip.ingest.synthetic_gx3_pdf import SyntheticGXWorks3PdfGenerator
 from eip.ir.schema import LogicExprNode
 from eip.ladder.geometry_builder import LadderGeometryBuilder
 from eip.ladder.stack_compiler import LadderStackCompiler
-from eip.ladder.z3_verifier import LadderFormalVerifier
+from eip.ladder.z3_verifier import LadderFormalVerifier, ProjectKnowledgeGraph
 from eip.plc.lexer import FX5UDeviceLexer
 
 
@@ -275,6 +280,189 @@ class TestP0RealGXWorks3Project(unittest.TestCase):
         comments = parser.parse_device_comments(comment_pdf, max_pages=5)
         self.assertIn("M0", comments)
         self.assertEqual(comments["M0"].comment, "手动")
+
+
+class TestP1CrossDocumentKnowledgeGraph(unittest.TestCase):
+    """Phase 1 Cross-Language (ST + FBD/LD + Ladder) & Cross-Document Verification Suite."""
+
+    UPLOAD_DIR = Path("/working_dir/c_ba6c7fb98dadac19/user_uploaded_files/ttl=63d/user_uploaded")
+
+    def test_st_io_mapping_and_fb_state_machine_parsing(self) -> None:
+        st_pdf = self.UPLOAD_DIR / "02_ST.pdf"
+        fb_pdf = self.UPLOAD_DIR / "04_FB_FUN.pdf"
+        if not st_pdf.exists() or not fb_pdf.exists():
+            self.skipTest("ST / FB PDFs not attached")
+
+        st_parser = STStructuredTextParser()
+        st_main = st_parser.parse_st_pdf(st_pdf)
+        self.assertEqual(st_main.program_name, "分料送料IO映射")
+        self.assertEqual(len(st_main.assignments), 24)
+        self.assertIn("Y10", st_main.written_symbols)
+        self.assertIn("Conveyor[1].输送线正转", st_main.read_symbols)
+
+        fb_ir = st_parser.parse_st_pdf(fb_pdf)
+        self.assertEqual(fb_ir.program_name, "送料分料测试")
+        self.assertEqual(fb_ir.program_kind, "FB_DEF")
+        self.assertEqual(len(fb_ir.timer_calls), 5)
+        self.assertEqual(fb_ir.state_steps, [0, 1, 2, 3, 10, 20, 30, 50, 60, 70, 80])
+
+    def test_fbd_multipage_stitching_and_cross_doc_bug_detection(self) -> None:
+        fbd_pdf = self.UPLOAD_DIR / "03_FBD_LD.pdf"
+        st_pdf = self.UPLOAD_DIR / "02_ST.pdf"
+        fb_pdf = self.UPLOAD_DIR / "04_FB_FUN.pdf"
+        cclink_pdf = self.UPLOAD_DIR / "09_模块信息.pdf"
+        ladder_pdf = self.UPLOAD_DIR / "01_梯形图.pdf"
+        if not fbd_pdf.exists():
+            self.skipTest("03_FBD_LD.pdf not attached")
+
+        fbd_parser = FBDProgramParser()
+        instances, body_signals = fbd_parser.parse_fbd_pdf(fbd_pdf)
+        self.assertEqual(len(instances), 4)
+        self.assertEqual(
+            [inst.instance_name for inst in instances],
+            ["送料分料测试_1", "送料分料测试_2", "送料分料测试_3", "送料分料测试_4"],
+        )
+        self.assertEqual(instances[0].pages, [5, 7])
+        self.assertEqual(instances[2].pages, [3, 5])
+
+        st_parser = STStructuredTextParser()
+        st_main = st_parser.parse_st_pdf(st_pdf)
+        fb_def = st_parser.parse_st_pdf(fb_pdf)
+        cclink_rules = GX3ProjectTableParser().parse_cclink_refresh_config(cclink_pdf)
+        self.assertEqual(len(cclink_rules), 4)
+
+        backend = PdfPlumberBackend()
+        profiler = PDFModalityProfiler()
+        builder = LadderGeometryBuilder()
+        compiler = LadderStackCompiler()
+        prims14 = backend.extract_page_primitives(ladder_pdf, 14)
+        prof14 = profiler.profile_page(prims14)
+        rungs14 = [compiler.compile_rung(r) for r in builder.build_page_rungs(prims14, prof14)]
+
+        pkg = ProjectKnowledgeGraph()
+        pkg.build_from_project(
+            st_main=st_main,
+            fb_def=fb_def,
+            fbd_instances=instances,
+            fbd_body_signals=body_signals,
+            cclink_rules=cclink_rules,
+            ladder_rungs_by_page={14: rungs14},
+        )
+
+        trace_y10 = pkg.trace_backward("Y10", max_depth=4)
+        upstream_nodes = {edge[0] for edge in trace_y10}
+        self.assertIn("Conveyor[1].输送线正转", upstream_nodes)
+        self.assertIn("FB_INST:送料分料测试_1", upstream_nodes)
+        self.assertIn("X21", upstream_nodes)
+        self.assertIn("输送自动启动", upstream_nodes)
+        self.assertIn("M4", upstream_nodes)
+
+        xdoc_diags = pkg.run_cross_document_checks()
+        rule_ids = [d.rule_id for d in xdoc_diags]
+        self.assertIn("XDOC-01", rule_ids)
+        self.assertIn("XDOC-02", rule_ids)
+        self.assertIn("XDOC-03", rule_ids)
+
+
+class TestP2ElectricalSchematicReconciliation(unittest.TestCase):
+    """Phase 2 Electrical Schematic (5.边框储料机.pdf) & Program-First Reconciliation Suite."""
+
+    UPLOAD_DIR = Path("/working_dir/c_ba6c7fb98dadac19/user_uploaded_files/ttl=63d/user_uploaded")
+
+    def test_schematic_176_channels_and_program_first_reconciliation(self) -> None:
+        schem_pdf = self.UPLOAD_DIR / "5.边框储料机.pdf"
+        cmt_pdf = self.UPLOAD_DIR / "05_软元件注释.pdf"
+        if not schem_pdf.exists() or not cmt_pdf.exists():
+            self.skipTest("5.边框储料机.pdf or 05_软元件注释.pdf not attached")
+
+        tbl_parser = GX3ProjectTableParser()
+        plc_comments = tbl_parser.parse_device_comments(cmt_pdf)
+        schem_parser = ElectricalSchematicParser()
+        channels, power_circuits = schem_parser.parse_and_reconcile(
+            schem_pdf, plc_comments
+        )
+
+        # 22 I/O pages * 8 channels/page = 176 PLC I/O channels (120 X inputs + 56 Y outputs)
+        self.assertEqual(len(channels), 176)
+        self.assertEqual(len(power_circuits), 8)
+
+        ch_map = {c.canonical_device: c for c in channels}
+
+        # Verify physical relay + solenoid mapping on Y30 and Y43
+        self.assertEqual(ch_map["Y30"].component_tags, ["-KA2", "-YV1"])
+        self.assertEqual(ch_map["Y43"].component_tags, ["-KA13", "-YV12"])
+        self.assertTrue(ch_map["Y43"].has_pin_typo)
+        self.assertEqual(ch_map["Y43"].raw_top_pins, ["Y33"])
+
+        # Verify Page 22/23 X61..X67 and X71..X77 pin typos (14 input typos + 1 output typo = 15 total)
+        typo_channels = [c.canonical_device for c in channels if c.has_pin_typo]
+        self.assertEqual(len(typo_channels), 15)
+        self.assertIn("X61", typo_channels)
+        self.assertIn("X71", typo_channels)
+        self.assertIn("Y43", typo_channels)
+
+        # Verify Program-First Spare Activation (X150..X157, X160..X161, Y45..Y47 = 13 channels)
+        activated = [
+            c.canonical_device
+            for c in channels
+            if c.reconciliation_status == "SPARE_ACTIVATED_IN_PLC"
+        ]
+        self.assertEqual(len(activated), 13)
+        self.assertEqual(ch_map["X150"].authoritative_label_cn, "1层边框检测开关1")
+        self.assertEqual(ch_map["Y45"].authoritative_label_cn, "组框机暂停")
+        self.assertEqual(ch_map["Y47"].authoritative_label_cn, "给打胶机安全区信号")
+
+    def test_end_to_end_physical_valve_to_sensor_causal_trace(self) -> None:
+        schem_pdf = self.UPLOAD_DIR / "5.边框储料机.pdf"
+        cmt_pdf = self.UPLOAD_DIR / "05_软元件注释.pdf"
+        fbd_pdf = self.UPLOAD_DIR / "03_FBD_LD.pdf"
+        st_pdf = self.UPLOAD_DIR / "02_ST.pdf"
+        fb_pdf = self.UPLOAD_DIR / "04_FB_FUN.pdf"
+        cclink_pdf = self.UPLOAD_DIR / "09_模块信息.pdf"
+        if not schem_pdf.exists():
+            self.skipTest("5.边框储料机.pdf not attached")
+
+        tbl_parser = GX3ProjectTableParser()
+        plc_comments = tbl_parser.parse_device_comments(cmt_pdf)
+        channels, power_circuits = ElectricalSchematicParser().parse_and_reconcile(
+            schem_pdf, plc_comments
+        )
+        instances, body_signals = FBDProgramParser().parse_fbd_pdf(fbd_pdf)
+        st_parser = STStructuredTextParser()
+        st_main = st_parser.parse_st_pdf(st_pdf)
+        fb_def = st_parser.parse_st_pdf(fb_pdf)
+        cclink = tbl_parser.parse_cclink_refresh_config(cclink_pdf)
+
+        pkg = ProjectKnowledgeGraph()
+        pkg.build_from_project(
+            st_main=st_main,
+            fb_def=fb_def,
+            fbd_instances=instances,
+            fbd_body_signals=body_signals,
+            cclink_rules=cclink,
+            ladder_rungs_by_page={},
+            schematic_channels=channels,
+            power_circuits=power_circuits,
+        )
+
+        # Trace from physical solenoid valve HW:-YV1 backward to physical proximity sensors HW:-SQP1, HW:-PR10
+        trace_yv1 = pkg.trace_backward("HW:-YV1", max_depth=6)
+        upstream = {e[0] for e in trace_yv1}
+        self.assertIn("HW:-KA2", upstream)
+        self.assertIn("Y30", upstream)
+        self.assertIn("Conveyor[1].阻挡气缸", upstream)
+        self.assertIn("FB_INST:送料分料测试_1", upstream)
+        self.assertIn("X21", upstream)
+        self.assertIn("HW:-SQP1", upstream)
+        self.assertIn("HW:-PR10", upstream)
+
+        diags = pkg.run_cross_document_checks()
+        rule_ids = {d.rule_id for d in diags}
+        self.assertTrue(
+            {"XDOC-01", "XDOC-02", "XDOC-03", "SCHEM-01", "SCHEM-02", "SCHEM-03", "SCHEM-04"}.issubset(
+                rule_ids
+            )
+        )
 
 
 if __name__ == "__main__":

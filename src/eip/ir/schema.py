@@ -261,3 +261,130 @@ class LadderRungIR(BaseModel):
     verification_status: Literal["VERIFIED", "WARNING", "FAILED", "PENDING_HUMAN"] = "PENDING_HUMAN"
     diagnostics: List[str] = Field(default_factory=list)
     anchor: EvidenceAnchor
+
+
+# ============================================================================
+# Phase 1 & Phase 2 Extensions: ST, FBD/LD, CC-Link, Electrical Schematic & KG
+# ============================================================================
+
+class STAssignmentIR(BaseModel):
+    stmt_id: str
+    page_no: int
+    line_no: int
+    target_var: str
+    expr_text: str
+    read_symbols: List[str] = Field(default_factory=list)
+    enclosing_step: Optional[int] = None
+    guard_condition: Optional[str] = None
+    comment: Optional[str] = None
+
+
+class STTimerCallIR(BaseModel):
+    instance_name: str
+    page_no: int
+    line_no: int
+    enable_expr: str
+    preset_expr: str
+    current_var: str
+    output_var: str
+    read_symbols: List[str] = Field(default_factory=list)
+    comment: Optional[str] = None
+
+
+class STProgramIR(BaseModel):
+    program_name: str
+    program_kind: Literal["ST_MAIN", "FB_DEF"]
+    source_file: str
+    assignments: List[STAssignmentIR] = Field(default_factory=list)
+    timer_calls: List[STTimerCallIR] = Field(default_factory=list)
+    state_steps: List[int] = Field(default_factory=list)
+    written_symbols: List[str] = Field(default_factory=list)
+    read_symbols: List[str] = Field(default_factory=list)
+
+
+class FBDPinBindingIR(BaseModel):
+    pin_name: str
+    pin_direction: Literal["IN", "OUT", "IN_OUT"]
+    bound_symbol: str
+    page_no: int
+    pin_bbox: BoundingBox
+    symbol_bbox: BoundingBox
+
+
+class FBDInstanceCallIR(BaseModel):
+    instance_name: str
+    fb_type: str
+    layer_index: Optional[int] = None
+    pages: List[int] = Field(default_factory=list)
+    block_bboxes: List[BoundingBox] = Field(default_factory=list)
+    pin_bindings: List[FBDPinBindingIR] = Field(default_factory=list)
+
+
+class CCLinkRefreshRuleIR(BaseModel):
+    module_name: str
+    network_no: int
+    station_no: int
+    rule_no: str
+    link_device: str
+    points: int
+    link_start: str
+    link_end: str
+    cpu_device: str
+    cpu_start: str
+    cpu_end: str
+
+
+class SchematicIOChannelIR(BaseModel):
+    """
+    Phase 2 Electrical Schematic I/O Channel & Program-First Reconciliation Record
+    (extracted from Pages 16-37 of 5.边框储料机.pdf and reconciled with 05_软元件注释.pdf).
+    """
+    page_no: int
+    column_index: int
+    canonical_device: str
+    raw_bottom_pin: str
+    raw_top_pins: List[str] = Field(default_factory=list)
+    has_pin_typo: bool = False
+    module_model: str = "FX5U-80MT/ES"
+    component_tags: List[str] = Field(default_factory=list)
+    power_circuit_ref: Optional[str] = None
+    schematic_label_cn: str = ""
+    plc_comment_cn: Optional[str] = None
+    authoritative_label_cn: str = ""
+    reconciliation_status: Literal[
+        "MATCHED",
+        "PIN_TYPO_IN_SCHEMATIC",
+        "SPARE_ACTIVATED_IN_PLC",
+        "REPURPOSED_OR_RENAMED_IN_PLC",
+        "DEPRECATED_IN_PLC",
+    ] = "MATCHED"
+    column_bbox: BoundingBox
+    top_pin_bbox: Optional[BoundingBox] = None
+    component_bboxes: List[BoundingBox] = Field(default_factory=list)
+
+
+class SchematicPowerCircuitIR(BaseModel):
+    """
+    Phase 2 Main Power, Servo (SD1..SD3), VFD (VFD1..VFD4), and Safety (-SR1) Circuit Record
+    extracted from Pages 3-15 of 5.边框储料机.pdf.
+    """
+    circuit_id: str
+    circuit_name: str
+    pages: List[int] = Field(default_factory=list)
+    breaker_tag: str
+    drive_tag: str
+    drive_model: str
+    motor_or_load_tag: str
+    plc_outputs: Dict[str, str] = Field(default_factory=dict)
+    plc_inputs: Dict[str, str] = Field(default_factory=dict)
+    schematic_notes: List[str] = Field(default_factory=list)
+
+
+class CrossDocDiagnosticIR(BaseModel):
+    """Static verification finding across multiple PLC languages/documents and electrical schematics."""
+    rule_id: str
+    severity: Literal["ERROR", "WARNING", "INFO"]
+    title: str
+    description: str
+    evidence_locations: List[str] = Field(default_factory=list)
+    remediation: str

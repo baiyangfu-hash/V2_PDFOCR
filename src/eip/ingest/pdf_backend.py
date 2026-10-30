@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import math
 import re
+import unicodedata
 from pathlib import Path
 from typing import Dict, List, Optional, Protocol, Tuple
 
@@ -15,6 +16,15 @@ from eip.ir.schema import (
 )
 
 _CID_GARBLED_RE = re.compile(r"\(cid:[0-9]+\)", re.IGNORECASE)
+
+
+def normalize_gx3_text(text: str) -> str:
+    """
+    Normalizes GX Works3 PDF text using Unicode NFKC so Kangxi radicals
+    (e.g. U+2F53 '⽓' -> '气', U+2F83 '⾃' -> '自', U+2F8F '⾏' -> '行')
+    are canonically unified with standard CJK characters across all PDFs.
+    """
+    return unicodedata.normalize("NFKC", text).strip()
 
 
 class PagePrimitives:
@@ -107,7 +117,6 @@ class PyMuPDFBackend:
             items = d.get("items", [])
             has_bezier = any(it[0] in ("c", "qu") for it in items)
 
-            # Check for filled 4-point arrowhead polygons in GX Works3
             if is_filled and not has_bezier and all(it[0] == "l" for it in items):
                 poly_pts: List[Tuple[float, float]] = []
                 for it in items:
@@ -197,7 +206,8 @@ class PyMuPDFBackend:
             elif block.get("type") == 0:
                 for line in block.get("lines", []):
                     for span in line.get("spans", []):
-                        txt = str(span.get("text", "")).strip()
+                        raw_str = str(span.get("text", ""))
+                        txt = normalize_gx3_text(raw_str)
                         if not txt:
                             continue
                         t_idx += 1
@@ -215,7 +225,7 @@ class PyMuPDFBackend:
                                 ),
                                 font_name=str(span.get("font", "Unknown")),
                                 font_size=float(span.get("size", 8.0)),
-                                has_garbled_glyphs=has_garbled_characters(txt),
+                                has_garbled_glyphs=has_garbled_characters(raw_str),
                             )
                         )
         doc.close()
@@ -310,8 +320,6 @@ class PdfPlumberBackend:
                             )
                         )
                 else:
-                    # Unfilled straight polyline (e.g. GX Works3 3-point power rail or vertical drop line):
-                    # decompose into consecutive 2-point RawVectorLine segments
                     for seg_k in range(len(all_pts) - 1):
                         p_a = all_pts[seg_k]
                         p_b = all_pts[seg_k + 1]
@@ -336,7 +344,8 @@ class PdfPlumberBackend:
             )
             texts: List[RawTextSpan] = []
             for idx, w in enumerate(raw_words, start=1):
-                txt = str(w["text"]).strip()
+                raw_str = str(w["text"])
+                txt = normalize_gx3_text(raw_str)
                 if not txt:
                     continue
                 texts.append(
@@ -352,7 +361,7 @@ class PdfPlumberBackend:
                         ),
                         font_name=str(w.get("fontname", "Unknown")),
                         font_size=float(w.get("size", 8.0)),
-                        has_garbled_glyphs=has_garbled_characters(txt),
+                        has_garbled_glyphs=has_garbled_characters(raw_str),
                     )
                 )
 
